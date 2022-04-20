@@ -10,8 +10,8 @@ manage the environment and some dependencies.
 
 We use [poetry](https://github.com/python-poetry/poetry) to manage the dependencies.
 
-First install the dependency crome-logic, crome-contracts and crome-synthesis from git in the same folder where
-crome-cgg is located
+First install the dependency crome-logic, crome-contracts and crome-synthesis from git
+in the same folder where crome-cgg is located
 
 ```bash
 git clone https://github.com/pierg/crome-logic.git

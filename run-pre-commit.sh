@@ -1,2 +1,2 @@
-pre-commit run --files crome_cgg/*
+pre-commit run --all-files
 pre-commit run --files examples/*
