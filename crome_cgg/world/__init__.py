@@ -4,8 +4,9 @@ import uuid
 from copy import copy
 from dataclasses import dataclass, field
 
+from crome_cgg.context import Context
 from crome_logic.specification.temporal import LTL
-from crome_logic.typeelement import CromeType
+from crome_logic.typeelement import CromeType, TypeKind
 from crome_logic.typeelement.robotic import (
     BooleanAction,
     BooleanContext,
@@ -28,7 +29,10 @@ class World(dict):
             self._add_atom(crome_type)
 
     def _add_atom(self, crome_type: CromeType):
-        atom = LTL(crome_type.name)
+        if crome_type.kind == TypeKind.CONTEXT:
+            atom = Context(crome_type.name)
+        else:
+            atom = LTL(crome_type.name)
         super().__setitem__(crome_type.name, atom)
         super().__setitem__(f"!{crome_type.name}", ~atom)
 

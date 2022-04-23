@@ -2,18 +2,56 @@ from crome_contracts.contract import Contract
 from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling
 from crome_logic.patterns.robotic_triggers import BoundDelay, BoundReaction
 from crome_logic.specification.temporal import LTL
+from crome_logic.typeelement.robotic import (
+    BooleanAction,
+    BooleanContext,
+    BooleanLocation,
+    BooleanSensor,
+)
+from crome_logic.typeset import Typeset
 
+from crome_cgg.cgg import Cgg
 from crome_cgg.cgg.exceptions import CggException
 from crome_cgg.goal import Goal
-from crome_cgg.tools.persistence import dump_goals
+from crome_cgg.world import World
 from examples.contextual_gridworld import project_name
-from examples.contextual_gridworld.modeling_world import gridworld
+
+# WORLD MODELING
+gridworld = World(
+    project_name=project_name,
+    typeset=Typeset(
+        {
+            BooleanAction(name="greet"),
+            BooleanAction(name="register"),
+            BooleanLocation(
+                name="r1", mutex_group="locations", adjacency_set={"r2", "r5"}
+            ),
+            BooleanLocation(
+                name="r2", mutex_group="locations", adjacency_set={"r1", "r5"}
+            ),
+            BooleanLocation(
+                name="r3", mutex_group="locations", adjacency_set={"r4", "r5"}
+            ),
+            BooleanLocation(
+                name="r4", mutex_group="locations", adjacency_set={"r3", "r5"}
+            ),
+            BooleanLocation(
+                name="r5",
+                mutex_group="locations",
+                adjacency_set={"r1", "r2", "r3", "r4"},
+            ),
+            BooleanSensor(name="person"),
+            BooleanContext(name="day", mutex_group="time"),
+            BooleanContext(name="night", mutex_group="time"),
+        }
+    ),
+)
 
 w = gridworld
 
-try:
+# GOAL MODELING
 
-    """Modeling the set of goals using robotic robotic.json."""
+try:
     goals = {
         Goal(
             id="day_patrol_12",
@@ -67,9 +105,11 @@ try:
             world=w,
         ),
     }
-    #
-    # """Save set of goals so that they can be loaded later"""
-    # dump_goals(goals, folder_name=project_name)
 
 except CggException as e:
     raise e
+
+
+# CGG BUILDING
+
+cgg = Cgg(init_goals=goals)

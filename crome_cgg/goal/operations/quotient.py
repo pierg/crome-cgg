@@ -1,3 +1,4 @@
+from crome_cgg.cgg import Cgg, Link
 from crome_contracts.contract.exceptions import ContractException
 from crome_contracts.operations.quotient import quotient
 
@@ -11,7 +12,7 @@ from crome_cgg.goal.operations._shared import (
 )
 
 
-def g_quotient(dividend: Goal, divisor: Goal) -> Goal:
+def g_quotient(dividend: Goal, divisor: Goal, cgg: Cgg | None = None) -> Goal:
     if dividend is None:
         raise Exception("No dividend specified in the quotient")
     if divisor is None:
@@ -41,5 +42,11 @@ def g_quotient(dividend: Goal, divisor: Goal) -> Goal:
         context=context,
         world=world,
     )
+
+    # Fix Cgg
+    if cgg is not None:
+        cgg.add_edge(node_a=dividend, node_b=goal, link=Link.quotient_dividend)
+        cgg.add_edge(node_a=divisor, node_b=goal, link=Link.quotient_divisor)
+
 
     return goal

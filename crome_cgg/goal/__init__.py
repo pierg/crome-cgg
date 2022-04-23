@@ -18,6 +18,7 @@ class Goal:
     description: str = ""
     context: Context = Context(formula="TRUE")
     world: World = field(default_factory=lambda: World())
+    viewpoint: str = ""
 
     _parents: dict = field(init=False, repr=False, default_factory=dict)
     _children: dict = field(init=False, repr=False, default_factory=dict)
@@ -41,6 +42,9 @@ class Goal:
             self.world = World(typeset=self.contract.typeset)
         else:
             self.world = World(typeset=self.contract.typeset + self.world.typeset)
+
+        if self.viewpoint == "":
+            self.viewpoint: str = self.contract.typeset.extract_viewpoint()
 
     @property
     def controller(self) -> Controller | None:

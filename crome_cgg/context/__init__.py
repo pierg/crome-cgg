@@ -1,7 +1,7 @@
-from crome_logic.specification.boolean import Bool
+from crome_logic.specification.temporal import LTL
 
 
-class Context(Bool):
+class Context(LTL):
     pass
 
 

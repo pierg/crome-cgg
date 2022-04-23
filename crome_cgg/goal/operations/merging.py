@@ -1,3 +1,4 @@
+from crome_cgg.cgg import Cgg, Link
 from crome_contracts.contract.exceptions import ContractException
 from crome_contracts.operations.merging import merging
 
@@ -11,7 +12,7 @@ from crome_cgg.goal.operations._shared import (
 )
 
 
-def g_merging(goals: set[Goal]) -> Goal:
+def g_merging(goals: set[Goal], cgg: Cgg | None = None) -> Goal:
     if len(goals) == 1:
         return next(iter(goals))
     if len(goals) == 0:
@@ -41,5 +42,10 @@ def g_merging(goals: set[Goal]) -> Goal:
         context=context,
         world=world,
     )
+
+    # Fix Cgg
+    if cgg is not None:
+        for g in goals:
+            cgg.add_edge(node_a=g, node_b=goal, link=Link.conjunction)
 
     return goal
