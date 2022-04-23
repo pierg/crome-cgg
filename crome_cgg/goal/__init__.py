@@ -9,6 +9,7 @@ from crome_synthesis.controller import Controller
 from crome_cgg.context import Context
 from crome_cgg.tools.names import generate_goal_id
 from crome_cgg.world import World
+from tools.strings import tab
 
 
 @dataclass
@@ -55,7 +56,19 @@ class Goal:
             self.contract.assumptions, self.contract.guarantees
         )
 
+    def __str__(self):
+        s1 = f"GOAL {self.id}"
+        s2 = f"CONTEXT\n"\
+             f"{tab(str(self.context))}"
+        s3 = f"CONTRACT\n"\
+             f"{tab(str(self.contract))}"
+
+        s2 = tab(s2)
+        s3 = tab(s3)
+
+        return s1 + "\n" + s2 + "\n" + s3 + "\n\n"
+
 
 if __name__ == "__main__":
     g = Goal(contract=Contract(LTL("Ga")))
-    print(g.world)
+    print(g)

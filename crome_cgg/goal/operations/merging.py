@@ -43,9 +43,11 @@ def g_merging(goals: set[Goal], cgg: Cgg | None = None) -> Goal:
         world=world,
     )
 
+    goals_ids = ", ".join(g.id for g in goals)
+    print(f"{goal.id} -- merging of -- {goals_ids}")
     # Fix Cgg
     if cgg is not None:
         for g in goals:
-            cgg.add_edge(node_a=g, node_b=goal, link=Link.conjunction)
+            cgg.add_edge(node_a=g, node_b=goal, link=Link.merging)
 
     return goal

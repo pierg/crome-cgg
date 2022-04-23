@@ -43,6 +43,8 @@ def g_conjunction(goals: set[Goal], cgg: Cgg | None = None) -> Goal:
         world=world,
     )
 
+    goals_ids = ", ".join(g.id for g in goals)
+    print(f"{goal.id} -- conjunction of -- {goals_ids}")
     # Fix Cgg
     if cgg is not None:
         for g in goals:

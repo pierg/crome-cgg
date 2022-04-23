@@ -113,3 +113,21 @@ except CggException as e:
 # CGG BUILDING
 
 cgg = Cgg(init_goals=goals)
+
+print(cgg.goal_ids)
+
+for goal in cgg.goals:
+    if cgg.get_parents_of(goal) is not None:
+        for link, goals_connected in cgg.get_parents_of(goal).items():
+            goals_ids = ", ".join(g.id for g in goals_connected)
+            print(f"{goal.id}\t--\t{link.name}\t-->\t{goals_ids}")
+    if cgg.get_children_of(goal) is not None:
+        for link, goals_connected in cgg.get_children_of(goal).items():
+            goals_ids = ", ".join(g.id for g in goals_connected)
+            print(f"{goal.id}\t--\t{link.name}\t<--\t{goals_ids}")
+
+
+print(cgg.root.id)
+print(", ".join([g.id for g in cgg.leaves]))
+
+print(cgg)
