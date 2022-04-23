@@ -19,7 +19,7 @@ def g_quotient(dividend: Goal, divisor: Goal) -> Goal:
 
     world = generate_shared_world({dividend, divisor})
 
-    name, description = generate_goal_operations_name_description(
+    id, description = generate_goal_operations_name_description(
         [dividend, divisor], GoalOperation.Quotient
     )
 
@@ -36,7 +36,7 @@ def g_quotient(dividend: Goal, divisor: Goal) -> Goal:
 
     goal = Goal(
         contract=contract,
-        name=name,
+        id=id,
         description=description,
         context=context,
         world=world,

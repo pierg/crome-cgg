@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 
 from crome_contracts.contract.exceptions import ContractException
@@ -19,51 +19,44 @@ class GoalFailOperations(Enum):
     separation = 6
 
 
-class GoalFailMotivations(Enum):
-    goal_not_found = 0
-    inconsistent = 1
-    incompatible = 2
-    unfeasible = 3
-    wrong_refinement = 4
-
-
-@dataclass
+@dataclass(kw_only=True)
 class GoalException(Exception):
+    goals: set[Goal]
     message: str
 
     def __post_init__(self):
-        header = "*** GOAL EXCEPTION ***"
-        print(f"{header}\n{self.message}")
+        self.message += (
+            f"*** GoalException EXCEPTION ***\n"
+            f"Goals involved in the failure:\n"
+            f"{', '.join(g.id for g in self.goals)}"
+        )
+        print(self.message)
 
 
-@dataclass
+@dataclass(kw_only=True)
 class GoalAlgebraOperationFail(GoalException):
-    goals: set[Goal]
     operation: GoalFailOperations
     contr_ex: ContractException
+    message: str = "*** GoalAlgebraOperationFail EXCEPTION ***\n"
 
     def __post_init__(self):
-        message = (
-            f"A failure has occurred while performing '{self.operation.name}' on goals:\n"
-            f"{', '.join(g.name for g in self.goals)}"
+        self.message += (
+            f"A failure has occurred while performing '{self.operation.name}'"
         )
-        super().__init__(message)
 
 
-@dataclass
+@dataclass(kw_only=True)
 class GoalSharedWorldFail(GoalException):
-    goals: set[Goal]
+    message: str = (
+        "*** GoalSharedWorldFail EXCEPTION ***\n"
+        "The goals have different world variables"
+    )
 
-    def __post_init__(self):
-        message = "The goals involved in the operation have different world variables"
-        super().__init__(message)
 
-
-@dataclass
+@dataclass(kw_only=True)
 class GoalSynthesisFail(GoalException):
-    goal: Goal
     controller_ex: ControllerException
-
-    def __post_init__(self):
-        message = f"A failure has occurred while performing trying to realize the goal '{self.goal.name}'"
-        super().__init__(message)
+    message: str = (
+        "*** GoalSynthesisFail EXCEPTION ***\n"
+        "A failure has occurred while performing trying to realize the goal"
+    )

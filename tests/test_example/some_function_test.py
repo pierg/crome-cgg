@@ -1,5 +1,4 @@
 import pytest
-
 from crome_cgg.example import some_function
 
 

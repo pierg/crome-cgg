@@ -2,23 +2,25 @@ from __future__ import annotations
 
 import uuid
 from copy import copy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from crome_logic.specification.temporal import LTL
+from crome_logic.typeelement import CromeType
+from crome_logic.typeelement.robotic import (
+    BooleanAction,
+    BooleanContext,
+    BooleanLocation,
+    BooleanSensor,
+)
 from crome_logic.typeset import Typeset
-from crome_logic.typesimple import CromeType
-from crome_logic.typesimple.subtype.robotic.action import BooleanAction
-from crome_logic.typesimple.subtype.robotic.context import ContextType
-from crome_logic.typesimple.subtype.robotic.location import Location
-from crome_logic.typesimple.subtype.robotic.sensor import BooleanSensor
 
 
 @dataclass
 class World(dict):
-    typeset: Typeset
     project_name: str = str(uuid.uuid4())
+    typeset: Typeset = field(default_factory=lambda: Typeset())
 
-    def __attrs_post_init__(self):
+    def __post_init__(self):
         self._generate_atoms()
 
     def _generate_atoms(self) -> None:
@@ -45,22 +47,18 @@ class World(dict):
     def new_boolean_location(
         self, name, mutex: str = "", adjacency: set[str] | None = None
     ):
-        crome_type = Location(name, mutex, adjacency)
+        crome_type = BooleanLocation(name, mutex, adjacency)
         self.add_type(crome_type)
 
     def new_boolean_context(self, name, mutex: str = ""):
-        crome_type = ContextType(name, mutex)
+        crome_type = BooleanContext(name, mutex)
         self.add_type(crome_type)
 
-    def adjacent_types(self, location: Location) -> set[Location]:
-
-        adjacent_types = set()
-        for class_name in location.adjacency_set:
-            for t in self.typeset.values():
-                if type(t).__name__ == class_name:
-                    adjacent_types.add(t)
-
-        return adjacent_types
+    def __add__(self, element: World) -> World:
+        """Generate a shallow new World self + element."""
+        world = copy(self)
+        world += element
+        return world
 
     def __iadd__(self, element: World) -> World:
         """Updates self with self += element."""

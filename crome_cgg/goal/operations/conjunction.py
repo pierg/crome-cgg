@@ -19,7 +19,7 @@ def g_conjunction(goals: set[Goal]) -> Goal:
 
     world = generate_shared_world(goals)
 
-    name, description = generate_goal_operations_name_description(
+    id, description = generate_goal_operations_name_description(
         list(goals), GoalOperation.Conjunction
     )
 
@@ -36,7 +36,7 @@ def g_conjunction(goals: set[Goal]) -> Goal:
 
     goal = Goal(
         contract=contract,
-        name=name,
+        id=id,
         description=description,
         context=context,
         world=world,

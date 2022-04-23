@@ -16,25 +16,25 @@ class GoalOperation(Enum):
 def generate_goal_operations_name_description(
     goals: list[Goal], operation: GoalOperation
 ) -> tuple[str, str]:
-    goals_names = ", ".join(list(map(lambda g: g.name, goals)))
+    goals_names = ", ".join(list(map(lambda g: g.id, goals)))
 
     if operation == GoalOperation.Composition:
-        name = "||".join(list(map(lambda g: g.name, goals)))
+        name = "||".join(list(map(lambda g: g.id, goals)))
 
     elif operation == GoalOperation.Conjunction:
-        name = "/\\".join(list(map(lambda g: g.name, goals)))
+        name = "/\\".join(list(map(lambda g: g.id, goals)))
 
     elif operation == GoalOperation.Merging:
-        name = "**".join(list(map(lambda g: g.name, goals)))
+        name = "**".join(list(map(lambda g: g.id, goals)))
 
     elif operation == GoalOperation.Quotient:
-        name = "//".join(list(map(lambda g: g.name, goals)))
+        name = "//".join(list(map(lambda g: g.id, goals)))
 
     elif operation == GoalOperation.Separation:
-        name = "::".join(list(map(lambda g: g.name, goals)))
+        name = "::".join(list(map(lambda g: g.id, goals)))
 
     elif operation == GoalOperation.Refinement:
-        name = "->".join(list(map(lambda g: g.name, goals)))
+        name = "->".join(list(map(lambda g: g.id, goals)))
 
     else:
         raise Exception("Operation not recognized")
