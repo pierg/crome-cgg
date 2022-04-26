@@ -24,10 +24,13 @@ FROM pmallozzi/ltltools:latest AS runtime
 RUN apt-get -y update
 RUN apt-get -y install git
 
+RUN apt-get update
+RUN apt-get -y install gcc
+
 WORKDIR /home
 
 ENV GIT_SSL_NO_VERIFY=1
-RUN git clone https://github.com/pierg/crome-cgg.git --branch main --single-branch
+COPY . /home/crome-cgg
 RUN git clone https://github.com/pierg/crome-contracts.git --branch main --single-branch
 RUN git clone https://github.com/pierg/crome-logic.git --branch main --single-branch
 RUN git clone https://github.com/pierg/crome-synthesis.git --branch main --single-branch
@@ -41,7 +44,7 @@ COPY --from=build /venv ./venv
 #RUN poetry install
 
 
-ENV PYTHONPATH "${PYTHONPATH}:/home/crome-cgg/crom_cgg:/home/crome-contracts/crom_contracts:/home/crome-logic/crom_logic:/home/crome-synthesis/crom_synthesis"
+ENV PYTHONPATH "${PYTHONPATH}:/home/crome-cgg:/home/crome-contracts:/home/crome-logic:/home/crome-synthesis"
 
 ## When image is run, run the code with the environment
 ## activated:
