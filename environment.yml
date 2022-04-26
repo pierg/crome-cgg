@@ -10,3 +10,4 @@ dependencies:
   - spot
   - pre-commit
   - matplotlib
+  - poetry
