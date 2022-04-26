@@ -31,8 +31,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10"
 crome-logic = {path = "../crome-logic", develop = true}
-crome-contracts = {path = "../crome-contracts", develop = true}
-crome-synthesis = {path = "../crome-synthesis", develop = true}
 isort = "^5.10.1"
 docformatter = "^1.4"
 black = "^22.1.0"
@@ -44,16 +42,7 @@ yapf = "^0.32.0"
 oitnb = "^0.2.2"
 flake8-quotes = "^3.3.1"
 bandit = "^1.7.2"
-aenum = "^3.1.8"
-treelib = "^1.6.1"
-pyeda = "^0.28.0"
-docker = "^5.0.3"
 mypy = "^0.931"
-bloom-filter = "^1.3.3"
-attrs = "^21.4.0"
-types-attrs = "^19.1.0"
-igraph = "^0.9.10"
-dill = "^0.3.4"
 
 [tool.poetry.dev-dependencies]
 
