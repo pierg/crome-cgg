@@ -69,3 +69,6 @@ class World(dict):
         self.typeset += element.typeset
         self._generate_atoms()
         return self
+
+    def __reduce__(self):
+        return self.__class__, (self.project_name, self.typeset,)

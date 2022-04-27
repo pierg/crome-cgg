@@ -34,8 +34,12 @@ def load_cgg(folder_name: str = "") -> Cgg | None:
 def dump_world(world: World, folder_name: str = ""):
     _make_path(folder_name)
 
-    with open(persistence_path / folder_name / "world.dat", "wb") as stream:
+    file = persistence_path / folder_name / "world.dat"
+
+    with open(file, "wb") as stream:
         dill.dump(world, stream)
+
+    print(f"{file} saved correctly")
 
 
 def load_world(folder_name: str = "") -> World | None:

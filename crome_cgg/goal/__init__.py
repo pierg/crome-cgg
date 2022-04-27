@@ -69,6 +69,8 @@ class Goal:
         return s1 + "\n" + s2 + "\n" + s3 + "\n\n"
 
 
+
+
 if __name__ == "__main__":
     g = Goal(contract=Contract(LTL("Ga")))
     print(g)
