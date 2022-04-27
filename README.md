@@ -32,7 +32,7 @@ poetry install
 
 ### System Requirements
 
-[Strix](https://strix.model.in.tum.de) must be installed on the system. Alternatevely, a
+[Strix](https://strix.model.in.tum.de) must be installed on the system. Alternatively, a
 [docker](https://www.docker.com) must be installed and running.
 
 
