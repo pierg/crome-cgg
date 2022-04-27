@@ -30,7 +30,9 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+crome-contracts = {path = "../crome-contracts", develop = true}
 crome-logic = {path = "../crome-logic", develop = true}
+crome-synthesis = {path = "../crome-synthesis", develop = true}
 isort = "^5.10.1"
 docformatter = "^1.4"
 black = "^22.1.0"
