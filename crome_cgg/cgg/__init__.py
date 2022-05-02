@@ -1,5 +1,8 @@
+import json
+import os
 from dataclasses import dataclass, field
 from enum import Enum, auto
+from pathlib import Path
 
 from igraph import Graph, plot
 from matplotlib import pyplot as plt
@@ -117,7 +120,6 @@ class Cgg:
         if self.get_children_of(self.root) is not None:
             return self._print_node(self.root)
 
-
     def _print_node(self, node: Goal, level=1):
         if node in self.leaves:
             return tab(str(node), how_many=level)
@@ -125,10 +127,8 @@ class Cgg:
         for link, goals in self.get_children_of(node).items():
             res += ("\t" * level) + f"{link.name}\n"
             for goal in goals:
-                res += self._print_node(goal, level+1)
+                res += self._print_node(goal, level + 1)
         return res
-
-
 
     def draw(self):
         """TODO: Better draw function"""
@@ -137,3 +137,80 @@ class Cgg:
             fig, ax = plt.subplots()
             plot(self._graph, layout=layout, target=ax)
             plt.savefig(output_folder / "cgg.pdf")
+
+    def export_to_json(self, goals_folder: str) -> None:
+        self.rec_exporting_to_json(goals_folder, self.root.id)
+
+    def rec_exporting_to_json(self, goals_folder: str, goal_id: str, parent_id: str = None):
+        goal = self.get_goal_by_id(goal_id)
+        copy = {"id": goal.id}
+        dic_children = self.get_children_of(goal)
+        if dic_children is not None:
+            for link in dic_children:
+                copy["link"] = link.name
+                copy["children"] = []
+                for child in dic_children[link]:
+                    child_copy = self.rec_exporting_to_json(goals_folder, child.id, goal.id)
+                    Cgg.exporting_in_files(
+                        goal.id,
+                        goals_folder,
+                        "children",
+                        child.id,
+                        link.name,
+                    )
+                    copy["children"].append(child_copy)
+        if parent_id is not None:
+            Cgg.exporting_in_files(
+                goal_id,
+                goals_folder,
+                "parents",
+                parent_id
+            )
+        return copy
+
+    @staticmethod
+    def exporting_in_files(
+            node_id: str,
+            goals_folder: str,
+            mode: str,
+            new_element: str,
+            link: str = None,
+    ):
+        filename = "&".join(str(node_id).split("/"))
+        goal_folder = Path(
+            os.path.join(goals_folder, f"{filename}.json")
+        )
+        if os.path.exists(goal_folder):
+            with open(goal_folder) as json_file:
+                json_goal = json.load(json_file)
+        else:
+            json_goal = {"group": "new", "id": node_id}
+        with open(goal_folder, "w") as json_file:
+            existing_array = []
+            if mode in json_goal:
+                for element in json_goal[mode]:
+                    existing_array.append(element)
+            if new_element not in existing_array:
+                existing_array.append(new_element)
+            if link is not None:
+                json_goal["link"] = link
+            json_goal[mode] = existing_array
+            json_formatted = json.dumps(json_goal, indent=4, sort_keys=True)
+            json_file.write(json_formatted)
+
+    """def export_to_json(self, project_folder: str) -> None:
+        json_goal = {"nodes": [], "links": []}
+        for node_name in self._graph.vs()["name"]:
+            json_goal["nodes"].append({"id": node_name})
+        folder = Path(
+            os.path.join(project_folder, "cgg.json")
+        )
+
+        for es in self._graph.es:
+            json_goal["links"].append({"from:": self._graph.vs()["name"][es.tuple[0]],
+                                       "to": self._graph.vs()["name"][es.tuple[1]],
+                                       "type": str(es["link"]).split('.')[1]})
+
+        with open(folder, "w") as json_file:
+            json_formatted = json.dumps(json_goal, indent=4, sort_keys=True)
+            json_file.write(json_formatted)"""
