@@ -27,13 +27,16 @@ class Link(Enum):
 @dataclass
 class Cgg:
     init_goals: set[Goal]
-    _graph: Graph = field(init=False, repr=False, default_factory=lambda: Graph(directed=True))
+    _graph: Graph = field(
+        init=False, repr=False, default_factory=lambda: Graph(directed=True)
+    )
 
     def __post_init__(self):
         self._build_graph()
 
     def _build_graph(self) -> None:
         from crome_cgg.cgg.context_based_clustering import context_based_goal_clustering
+
         context_based_goal_clustering(self.init_goals, self)
 
     @property

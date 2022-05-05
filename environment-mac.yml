@@ -18,5 +18,5 @@ dependencies:
   - python-igraph
   - pip
   - pip:
-    - pyeda
-    - bloom-filter
+      - pyeda
+      - bloom-filter

@@ -6,10 +6,10 @@ from crome_cgg.shared.paths import output_folder
 
 
 def save_to_file(
-        file_content: str,
-        file_name: str,
-        folder_name: str | None = None,
-        absolute_folder_path: Path | None = None,
+    file_content: str,
+    file_name: str,
+    folder_name: str | None = None,
+    absolute_folder_path: Path | None = None,
 ) -> Path:
     if Path(file_name).suffix == "":
         file_name = Path(file_name) / ".txt"

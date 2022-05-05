@@ -1,6 +1,8 @@
 def tab(stringable_object, how_many=1) -> str:
     t = "\t" * how_many
-    return "\n".join(list(map(lambda x: f"{t}{x}", str(stringable_object).splitlines())))
+    return "\n".join(
+        list(map(lambda x: f"{t}{x}", str(stringable_object).splitlines()))
+    )
 
 
 def repr_dictionary(dictionary: dict) -> str:
