@@ -24,13 +24,16 @@ class Link(Enum):
 @dataclass
 class Cgg:
     init_goals: set[Goal]
-    _graph: Graph = field(init=False, repr=False, default_factory=lambda: Graph(directed=True))
+    _graph: Graph = field(
+        init=False, repr=False, default_factory=lambda: Graph(directed=True)
+    )
 
     def __post_init__(self):
         self._build_graph()
 
     def _build_graph(self) -> None:
         from crome_cgg.cgg.context_based_clustering import context_based_goal_clustering
+
         context_based_goal_clustering(self.init_goals, self)
 
     @property
@@ -117,7 +120,6 @@ class Cgg:
         if self.get_children_of(self.root) is not None:
             return self._print_node(self.root)
 
-
     def _print_node(self, node: Goal, level=1):
         if node in self.leaves:
             return tab(str(node), how_many=level)
@@ -125,10 +127,8 @@ class Cgg:
         for link, goals in self.get_children_of(node).items():
             res += ("\t" * level) + f"{link.name}\n"
             for goal in goals:
-                res += self._print_node(goal, level+1)
+                res += self._print_node(goal, level + 1)
         return res
-
-
 
     def draw(self):
         """TODO: Better draw function"""

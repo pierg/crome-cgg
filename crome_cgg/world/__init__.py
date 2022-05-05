@@ -4,16 +4,17 @@ import uuid
 from copy import copy
 from dataclasses import dataclass, field
 
-from crome_cgg.context import Context
 from crome_logic.specification.temporal import LTL
-from crome_logic.typeelement import CromeType, TypeKind
-from crome_logic.typeelement.robotic import (
+from crome_logic.typelement import CromeType, TypeKind
+from crome_logic.typelement.robotic import (
     BooleanAction,
     BooleanContext,
     BooleanLocation,
     BooleanSensor,
 )
 from crome_logic.typeset import Typeset
+
+from crome_cgg.context import Context
 
 
 @dataclass
@@ -71,4 +72,7 @@ class World(dict):
         return self
 
     def __reduce__(self):
-        return self.__class__, (self.project_name, self.typeset,)
+        return self.__class__, (
+            self.project_name,
+            self.typeset,
+        )

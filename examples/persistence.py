@@ -1,9 +1,7 @@
-from crome_cgg.cgg import Cgg
-from crome_cgg.tools.persistence import dump_world, load_world, dump_goals, load_goals, dump_cgg, load_cgg
 from crome_contracts.contract import Contract
 from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling
 from crome_logic.specification.temporal import LTL
-from crome_logic.typeelement.robotic import (
+from crome_logic.typelement.robotic import (
     BooleanAction,
     BooleanContext,
     BooleanLocation,
@@ -11,7 +9,16 @@ from crome_logic.typeelement.robotic import (
 )
 from crome_logic.typeset import Typeset
 
+from crome_cgg.cgg import Cgg
 from crome_cgg.goal import Goal
+from crome_cgg.tools.persistence import (
+    dump_cgg,
+    dump_goals,
+    dump_world,
+    load_cgg,
+    load_goals,
+    load_world,
+)
 from crome_cgg.world import World
 
 project_name = "gridworld_persistence"
@@ -29,7 +36,7 @@ w = World(
             ),
             BooleanSensor(name="person"),
             BooleanContext(name="day", mutex_group="time"),
-            BooleanContext(name="night", mutex_group="time")
+            BooleanContext(name="night", mutex_group="time"),
         }
     ),
 )
@@ -38,22 +45,24 @@ dump_world(w, folder_name=project_name)
 w_retrieved = load_world(folder_name=project_name)
 assert w == w_retrieved
 
-goals = {Goal(
-    id="day_patrol_12",
-    description="During context day => start from r1, patrol r1, r2 in strict order,\n"
-                "Strict Ordered Patrolling Location r1, r2",
-    context=w["day"],
-    contract=Contract(
-        LTL(
-            StrictOrderedPatrolling(locations=["r1"]).__str__(),
-            typeset=w.typeset,
-        )
+goals = {
+    Goal(
+        id="day_patrol_12",
+        description="During context day => start from r1, patrol r1, r2 in strict order,\n"
+        "Strict Ordered Patrolling Location r1, r2",
+        context=w["day"],
+        contract=Contract(
+            LTL(
+                StrictOrderedPatrolling(locations=["r1"]).__str__(),
+                typeset=w.typeset,
+            )
+        ),
+        world=w,
     ),
-    world=w),
     Goal(
         id="night_patrol_34",
         description="During context night => start from r3, patrol r3, r4 in strict order,\n"
-                    "Strict Ordered Patrolling Location r3, r4",
+        "Strict Ordered Patrolling Location r3, r4",
         context=w["night"],
         contract=Contract(
             LTL(
@@ -62,7 +71,7 @@ goals = {Goal(
             )
         ),
         world=w,
-    )
+    ),
 }
 
 dump_goals(goals, folder_name=project_name)

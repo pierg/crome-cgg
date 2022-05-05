@@ -1,7 +1,7 @@
-from crome_cgg.cgg import Cgg, Link
 from crome_contracts.contract.exceptions import ContractException
 from crome_contracts.operations.quotient import quotient
 
+from crome_cgg.cgg import Cgg, Link
 from crome_cgg.context import group_conjunction
 from crome_cgg.goal import Goal
 from crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
@@ -47,6 +47,5 @@ def g_quotient(dividend: Goal, divisor: Goal, cgg: Cgg | None = None) -> Goal:
     if cgg is not None:
         cgg.add_edge(node_a=dividend, node_b=goal, link=Link.quotient_dividend)
         cgg.add_edge(node_a=divisor, node_b=goal, link=Link.quotient_divisor)
-
 
     return goal

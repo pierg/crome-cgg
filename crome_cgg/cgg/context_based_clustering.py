@@ -37,17 +37,11 @@ def context_based_goal_clustering(init_goals: set[Goal], cgg: Cgg):
     saturated_combinations_grouped = list(saturated_combinations)
     for c_a in saturated_combinations:
         for c_b in saturated_combinations:
-            if (
-                    c_a is not c_b
-                    and c_a <= c_b
-                    and c_b in saturated_combinations_grouped
-            ):
+            if c_a is not c_b and c_a <= c_b and c_b in saturated_combinations_grouped:
                 saturated_combinations_grouped.remove(c_b)
 
     print(
-        "\nCONTEXT MUTEX:\t"
-        + ",\t".join(str(x) for x in saturated_combinations)
-        + "\n"
+        "\nCONTEXT MUTEX:\t" + ",\t".join(str(x) for x in saturated_combinations) + "\n"
     )
 
     """Map to goals"""
