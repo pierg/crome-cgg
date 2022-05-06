@@ -1,5 +1,21 @@
 SHELL:=/usr/bin/env bash
 
+
+.PHONY: env-create
+env-create:
+	conda-merge ../crome-contracts/environment-contracts.yml ../crome-logic/environment-logic.yml ../crome-synthesis/environment-synthesis.yml environment-cgg.yml > environment.yml
+
+
+.PHONY: env-install
+env-install:
+	conda env create --force -f environment.yml
+
+
+.PHONY: env-activate
+env-activate:
+	conda activate crome-cgg
+
+
 .PHONY: lint
 lint:
 	poetry run doc8 -q docs
