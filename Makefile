@@ -15,6 +15,8 @@ env-install:
 env-activate:
 	conda activate crome-cgg
 
+.PHONY: env-all
+env-all: env-create env-install env-activate
 
 .PHONY: lint
 lint:
