@@ -1,0 +1,9 @@
+name: crome-cgg
+
+channels:
+  - default
+  - conda-forge
+
+dependencies:
+  - dill
+  - python-igraph

@@ -2,39 +2,12 @@
 
 Contract-Based Goal Graph package.
 
-## Installation
-
-We use
-[conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) to
-manage the environment and dependencies.
-
-We use [poetry](https://github.com/python-poetry/poetry) to manage 'development'
-dependencies (e.g. linting, type checking).
-
-Create the environment using conda:
-
-```bash
-conda env create -f environment.yml
-```
-
-Activate the conda environment
-
-```bash
-conda activate crome-logic
-```
-
-Install the other dependencies with poetry (optional):
-
-```bash
-poetry install
-```
-
-### System Requirements
+## System Requirements
 
 [Strix](https://strix.model.in.tum.de) must be installed on the system. Alternatively, a
 [docker](https://www.docker.com) must be installed and running.
 
-### Other Dependencies
+### Dependencies
 
 Clone crome-logic, crome-contracts, and crome-synthesis from git in the same folder
 where crome-web is located
