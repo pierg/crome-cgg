@@ -41,22 +41,22 @@ class World(dict):
         self.typeset += crome_type
         self._add_atom(crome_type)
 
-    def new_boolean_action(self, name: str, mutex: str = ""):
-        crome_type = BooleanAction(name, mutex)
+    def new_boolean_action(self, name: str, mutex: str = "") -> None:
+        crome_type = BooleanAction(name=name, mutex_group=mutex)
         self.add_type(crome_type)
 
-    def new_boolean_sensor(self, name, mutex: str = ""):
-        crome_type = BooleanSensor(name, mutex)
+    def new_boolean_sensor(self, name: str, mutex: str = "") -> None:
+        crome_type = BooleanSensor(name=name, mutex_group=mutex)
         self.add_type(crome_type)
 
     def new_boolean_location(
         self, name, mutex: str = "", adjacency: set[str] | None = None
-    ):
-        crome_type = BooleanLocation(name, mutex, adjacency)
+    ) -> None:
+        crome_type = BooleanLocation(name=name, mutex_group=mutex, adjacency_set=adjacency)
         self.add_type(crome_type)
 
-    def new_boolean_context(self, name, mutex: str = ""):
-        crome_type = BooleanContext(name, mutex)
+    def new_boolean_context(self, name: str, mutex: str = "") -> None:
+        crome_type = BooleanContext(name=name, mutex_group=mutex)
         self.add_type(crome_type)
 
     def __add__(self, element: World) -> World:
