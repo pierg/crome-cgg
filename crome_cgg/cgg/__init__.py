@@ -1,8 +1,8 @@
 import json
-import os
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from pathlib import Path
+from typing import Any
 
 from igraph import Graph, plot
 from matplotlib import pyplot as plt
@@ -10,6 +10,7 @@ from matplotlib import pyplot as plt
 from crome_cgg.cgg.exceptions import GoalAlreadyPresent
 from crome_cgg.goal import Goal
 from crome_cgg.shared.paths import output_folder
+from crome_logic.tools.crome_io import save_to_file
 from tools.strings import tab
 
 
@@ -41,7 +42,7 @@ class Cgg:
 
     @property
     def graph(self):
-        return list(self._graph)
+        return self._graph
 
     @property
     def n_nodes(self) -> int:
@@ -141,79 +142,20 @@ class Cgg:
             plot(self._graph, layout=layout, target=ax)
             plt.savefig(output_folder / "cgg.pdf")
 
-    def export_to_json(self, goals_folder: str) -> None:
-        self.rec_exporting_to_json(goals_folder, self.root.id)
+    def export_to_json(self, project_path: Path | None) -> dict[str, Any]:
+        json_content = {"nodes": [], "edges": []}
+        for node in self.nodes:
+            json_content["nodes"].append({"id": node["goal"].id})
 
-    def rec_exporting_to_json(self, goals_folder: str, goal_id: str, parent_id: str = None):
-        goal = self.get_goal_by_id(goal_id)
-        copy = {"id": goal.id}
-        dic_children = self.get_children_of(goal)
-        if dic_children is not None:
-            for link in dic_children:
-                copy["link"] = link.name
-                copy["children"] = []
-                for child in dic_children[link]:
-                    child_copy = self.rec_exporting_to_json(goals_folder, child.id, goal.id)
-                    Cgg.exporting_in_files(
-                        goal.id,
-                        goals_folder,
-                        "children",
-                        child.id,
-                        link.name,
-                    )
-                    copy["children"].append(child_copy)
-        if parent_id is not None:
-            Cgg.exporting_in_files(
-                goal_id,
-                goals_folder,
-                "parents",
-                parent_id
-            )
-        return copy
+        for edge in self._graph.es:
+            source_vertex_id = edge.source
+            target_vertex_id = edge.target
+            source_node_id = self.nodes[source_vertex_id]["goal"].id
+            target_node_id = self.nodes[target_vertex_id]["goal"].id
+            json_content["edges"].append({"from": source_node_id, "to": target_node_id, "link": edge["link"].name})
 
-    @staticmethod
-    def exporting_in_files(
-            node_id: str,
-            goals_folder: str,
-            mode: str,
-            new_element: str,
-            link: str = None,
-    ):
-        filename = "&".join(str(node_id).split("/"))
-        goal_folder = Path(
-            os.path.join(goals_folder, f"{filename}.json")
-        )
-        if os.path.exists(goal_folder):
-            with open(goal_folder) as json_file:
-                json_goal = json.load(json_file)
-        else:
-            json_goal = {"group": "new", "id": node_id}
-        with open(goal_folder, "w") as json_file:
-            existing_array = []
-            if mode in json_goal:
-                for element in json_goal[mode]:
-                    existing_array.append(element)
-            if new_element not in existing_array:
-                existing_array.append(new_element)
-            if link is not None:
-                json_goal["link"] = link
-            json_goal[mode] = existing_array
-            json_formatted = json.dumps(json_goal, indent=4, sort_keys=True)
-            json_file.write(json_formatted)
+        if project_path is not None:
+            json_formatted = json.dumps(json_content, indent=4, sort_keys=True)
+            save_to_file(file_content=json_formatted, file_name="cgg.json", absolute_folder_path=project_path)
 
-    """def export_to_json(self, project_folder: str) -> None:
-        json_goal = {"nodes": [], "links": []}
-        for node_name in self._graph.vs()["name"]:
-            json_goal["nodes"].append({"id": node_name})
-        folder = Path(
-            os.path.join(project_folder, "cgg.json")
-        )
-
-        for es in self._graph.es:
-            json_goal["links"].append({"from:": self._graph.vs()["name"][es.tuple[0]],
-                                       "to": self._graph.vs()["name"][es.tuple[1]],
-                                       "type": str(es["link"]).split('.')[1]})
-
-        with open(folder, "w") as json_file:
-            json_formatted = json.dumps(json_goal, indent=4, sort_keys=True)
-            json_file.write(json_formatted)"""
+        return json_content
