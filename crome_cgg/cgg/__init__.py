@@ -72,6 +72,14 @@ class Cgg:
         return leaves
 
     @property
+    def leaves_dict(self) -> dict[str, Goal]:
+        leaves: dict[str, Goal] = dict()
+        for goal_id in self.goal_ids:
+            if len(self._graph.es.select(_target=goal_id)) == 0:
+                leaves[goal_id] = self.get_goal_by_id(goal_id)
+        return leaves
+
+    @property
     def goals(self) -> set[Goal | None]:
         if self.n_nodes > 0:
             return set(self._graph.vs()["goal"])

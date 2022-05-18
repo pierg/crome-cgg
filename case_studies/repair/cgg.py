@@ -2,6 +2,8 @@ from case_studies.repair.goals import goals
 from case_studies.repair.world import world
 from crome_cgg.cgg import Cgg, Link
 from crome_cgg.goal import Goal
+from crome_cgg.goal.operations.composition import g_composition
+from crome_cgg.goal.operations.quotient import g_quotient
 from crome_cgg.library import Library
 from crome_contracts.contract import Contract
 from crome_logic.patterns.robotic_movement import Patrolling
@@ -40,7 +42,6 @@ print(
     f"Candidate goals which are covered by the library:\n{[g.id for g in list(candidate_goals)]}"
 )
 
-
 refined_goals = set()
 
 for goal in leaves:
@@ -51,11 +52,43 @@ for goal in leaves:
         cgg.add_edge(goal, refinement, Link.refinement)
         refined_goals.add(goal)
 
+print(f"There are {len(refined_goals)} goals refined")
+
 print(
     f"There are still {len(candidate_goals - refined_goals)} goals that are covered by the library "
     f"but are have no refinement"
 )
 
+candidate_goals = set()
+for goal in leaves - refined_goals:
+    if library.covers(goal):
+        candidate_goals.add(goal)
+
+print(
+    f"Candidate goals which are covered by the library:\n{[g.id for g in list(candidate_goals)]}"
+)
+leaves_dict = cgg.leaves_dict
 
 
+print(
+    f"Library goal '{l2.id}' covers CGG leaf '{leaves_dict['night_patrolling'].id}'"
+)
+assert not l2 <= leaves_dict["night_patrolling"]
 
+quotient = g_quotient(l2, leaves_dict["night_patrolling"])
+print(f"The quotient is: \n'{quotient}'")
+
+composition = g_composition({quotient, leaves_dict["night_patrolling"]})
+print(f"Their composition is: \n'{composition}'")
+
+assert composition <= leaves_dict["night_patrolling"]
+print(
+    f"Library goal '{l2.id}' composed with the quotient refines the CGG leaf '{leaves_dict['night_patrolling'].id}'"
+)
+
+print("Searching for refinements of the quotient...")
+print("No refinement has been found...")
+
+print(
+    "Modifying existing goal of CGG such that the current library goal can refine it, using separation and merging"
+)

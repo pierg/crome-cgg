@@ -97,10 +97,11 @@ class Library:
         MOCK UP OF GREEDY ALGORITHM IN COGOMO, TODO: integrate here
         """
 
+        print(f"Searching refinements for {goal_to_refine.id}")
+
         for n in range(1, len(self.goals)):
             for subset in itertools.combinations(self.goals, n):
-                n_compositions = len(subset)
-                if n_compositions == 1:
+                if len(subset) == 1:
                     subset_typeset = subset[0].contract.typeset
                 else:
                     subset_typeset = reduce(
@@ -109,6 +110,7 @@ class Library:
                 if not self.covers(goal_to_refine, subset_typeset)[0]:
                     continue
                 g = g_composition(subset)
+                print(f"Composition:\n{g}")
                 if g.contract <= goal_to_refine.contract:
                     return g
 

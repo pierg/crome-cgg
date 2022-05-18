@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from crome_contracts.contract import Contract
-from crome_logic.specification.temporal import LTL
-from crome_synthesis.controller import Controller
-
 from crome_cgg.context import Context
 from crome_cgg.tools.names import generate_goal_id
 from crome_cgg.world import World
+from crome_contracts.contract import Contract
+from crome_logic.specification.temporal import LTL
+from crome_synthesis.controller import Controller
 from tools.strings import tab
 
 
@@ -46,6 +45,9 @@ class Goal:
 
         if self.viewpoint == "":
             self.viewpoint: str = self.contract.typeset.extract_viewpoint()
+
+    def __le__(self: Goal, other: Goal):
+        return self.contract <= other.contract
 
     @property
     def controller(self) -> Controller | None:
