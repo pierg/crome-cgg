@@ -54,9 +54,7 @@ class Goal:
         return self._controller
 
     def realize(self):
-        self._controller = Controller(
-            self.contract.assumptions, self.contract.guarantees
-        )
+        self._controller = Controller(self.contract.assumptions, self.contract.guarantees)
 
     def __str__(self):
         res = []

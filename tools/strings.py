@@ -11,7 +11,7 @@ def tab(stringable_object, how_many=1, init_character: str="") -> str:
 
 def tabar(stringable_object, how_many=1) -> str:
     t: str = ""
-    t += "|\t" * (how_many-1)
+    t += "|\t" * how_many
     if stringable_object == "":
         return t
     return "\n".join(

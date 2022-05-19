@@ -6,16 +6,17 @@ from crome_logic.patterns.basic import GF
 from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling
 from crome_logic.patterns.robotic_triggers import BoundReaction, PromptReaction, InstantaneousReaction
 from crome_logic.specification.temporal import LTL
+from crome_synthesis.controller import Controller
 
 w = world
 
 goals = {
-    Goal(
-        id="day_patrolling",
-        description="During the day keep visiting the `front' locations",
-        contract=Contract(_guarantees=LTL(Patrolling(["lf"]), w.typeset)),
-        world=w,
-    ),
+    # Goal(
+    #     id="day_patrolling",
+    #     description="During the day keep visiting the `front' locations",
+    #     contract=Contract(_guarantees=LTL(Patrolling(["lf"]), w.typeset)),
+    #     world=w,
+    # ),
     Goal(
         id="always_wave",
         description="Always, immediately wave only when seeing a person",
@@ -37,7 +38,6 @@ goals = {
     ),
     Goal(
         id="night_report",
-        context=w["dy"],
         description="During the night promptly send a report when in the 'back' location",
         contract=Contract(_assumptions=LTL(GF("lb"), w.typeset),
                           _guarantees=LTL(PromptReaction("lb", "re"), w.typeset)),
@@ -64,7 +64,14 @@ for g in goals:
     print(g)
 
 
-
 cgg = Cgg(goals)
 
-print(cgg)
+print(cgg.root.contract.assumptions)
+
+print(cgg.root.contract.guarantees)
+
+cgg.root.realize()
+if cgg.root.controller is not None:
+    print(str(cgg.root.controller.mealy))
+
+
