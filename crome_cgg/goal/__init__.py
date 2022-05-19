@@ -59,15 +59,16 @@ class Goal:
         )
 
     def __str__(self):
-        s1 = f"GOAL {self.id}"
-        s2 = f"CONTEXT\n" f"{tab(str(self.context))}"
-        s3 = f"CONTRACT\n" f"{tab(str(self.contract))}"
+        res = []
 
-        s2 = tab(s2)
-        s3 = tab(s3)
+        res.append(tab(f"GOAL {self.id}", how_many=0, init_character="|---"))
+        if not self.context.is_true_expression:
+            res.append(tab("CONTEXT", how_many=1, init_character="|"))
+            res.append(tab(str(self.context), how_many=2, init_character="|"))
 
-        return s1 + "\n" + s2 + "\n" + s3 + "\n\n"
+        res.append(tab(str(self.contract), how_many=1, init_character="|"))
 
+        return "\n".join(res)
 
 if __name__ == "__main__":
     g = Goal(contract=Contract(LTL("Ga")))

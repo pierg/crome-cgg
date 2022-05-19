@@ -11,7 +11,7 @@ from crome_cgg.cgg.exceptions import GoalAlreadyPresent
 from crome_cgg.goal import Goal
 from crome_cgg.shared.paths import output_folder
 from crome_logic.tools.crome_io import save_to_file
-from tools.strings import tab
+from tools.strings import tab, tabar
 
 
 class Link(Enum):
@@ -130,17 +130,19 @@ class Cgg:
 
     def __str__(self):
         if self.get_children_of(self.root) is not None:
-            return self._print_node(self.root)
+            return tab(self._print_node(self.root), how_many=2)
 
-    def _print_node(self, node: Goal, level=1):
+    def _print_node(self, node: Goal, level=0):
         if node in self.leaves:
-            return tab(str(node), how_many=level)
-        res = ""
+            return tabar(str(node), how_many=level)
+        res = []
         for link, goals in self.get_children_of(node).items():
-            res += ("\t" * level) + f"{link.name}\n"
+            res.append(tabar(str(node), how_many=level))
+            res.append(f"{tabar('', level)}|---LINK: {link.name}")
+            res.append(f"{tabar('', level+1)}|")
             for goal in goals:
-                res += self._print_node(goal, level + 1)
-        return res
+                res.append(self._print_node(goal, level + 1))
+        return "\n".join(res)
 
     def draw(self):
         """TODO: Better draw function"""

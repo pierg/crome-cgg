@@ -1,5 +1,19 @@
-def tab(stringable_object, how_many=1) -> str:
-    t = "\t" * how_many
+def tab(stringable_object, how_many=1, init_character: str="") -> str:
+    t: str = ""
+    t += init_character
+    t += "\t" * how_many
+    if stringable_object == "":
+        return t
+    return "\n".join(
+        list(map(lambda x: f"{t}{x}", str(stringable_object).splitlines()))
+    )
+
+
+def tabar(stringable_object, how_many=1) -> str:
+    t: str = ""
+    t += "|\t" * (how_many-1)
+    if stringable_object == "":
+        return t
     return "\n".join(
         list(map(lambda x: f"{t}{x}", str(stringable_object).splitlines()))
     )

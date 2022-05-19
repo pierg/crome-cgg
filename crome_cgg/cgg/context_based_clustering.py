@@ -14,6 +14,10 @@ def context_based_goal_clustering(init_goals: set[Goal], cgg: Cgg):
         g.context for g in filter(lambda g: not g.context.is_valid, init_goals)
     }
 
+    if len(contexts) == 0 or len(contexts) == 1:
+        g_composition(init_goals, cgg=cgg)
+        return
+
     """Extract all combinations of context which are consistent"""
     saturated_combinations = []
     for i in range(0, len(contexts)):
