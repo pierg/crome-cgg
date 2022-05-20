@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 from crome_cgg.context import Context
 from crome_cgg.tools.names import generate_goal_id
@@ -55,6 +56,25 @@ class Goal:
 
     def realize(self):
         self._controller = Controller(self.contract.assumptions, self.contract.guarantees)
+
+    def export_to_json(self) -> dict[str, Any]:
+        json_content = {"contract": {}}
+        names_context = self.context.formula.replace(' ', '').split('&')
+        json_content["context"] = names_context
+
+        # We put the contracts with their LTL value only.
+        contract = self.contract
+        json_assumptions = contract.assumptions.export_to_json()
+        json_guarantees = contract.guarantees.export_to_json()
+
+        json_content["contract"]["assumptions"] = [json_assumptions]
+        json_content["contract"]["guarantees"] = [json_guarantees]
+
+        # Get the information of the new goal :
+        json_content["id"] = self.id
+        json_content["description"] = self.description
+
+        return json_content
 
     def __str__(self):
         res = []
