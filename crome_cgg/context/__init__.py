@@ -10,7 +10,7 @@ class Context(LTL):
 
 
 def group_conjunction(elements: set[Context]) -> Context:
-    typeset = Typeset.from_typesets(typesets)
+    typeset = Typeset.from_typesets([c.typeset for c in elements])
     formula = and_([c.formula for c in elements])
 
     return Context(_init_formula=formula, _typeset=typeset)
