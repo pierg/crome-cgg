@@ -1,6 +1,8 @@
+from __future__ import annotations
 from crome_logic.specification import and_, or_
 from crome_logic.specification.temporal import LTL
 from crome_logic.typeset import Typeset
+from dataclasses import dataclass
 
 
 class Context(LTL):
@@ -8,7 +10,19 @@ class Context(LTL):
 
 
 def group_conjunction(elements: set[Context]) -> Context:
-    typeset = Typeset.from_typesets([c.typeset for c in elements])
+    typesets = [c.typeset for c in elements]
+    print(f"The list of typeset is : {typesets}")
+    typeset = Typeset.from_typesets(typesets)
+    # We have to check if the context are compatible using the typeset
+    mutex_list = []
+    for name in typeset:
+        mutex = typeset[name].mutex_group
+        if mutex != "":
+            if mutex not in mutex_list:
+                mutex_list.append(mutex)
+            else:
+                raise ContextException
+
     formula = and_([c.formula for c in elements])
 
     return Context(_init_formula=formula, _typeset=typeset)
@@ -19,3 +33,14 @@ def group_disjunction(elements: set[Context]) -> Context:
     formula = or_([c.formula for c in elements])
 
     return Context(_init_formula=formula, _typeset=typeset)
+
+
+@dataclass(kw_only=True)
+class ContextException(Exception):
+    contexts: set[Context]
+
+    def __post_init(self):
+        contexts_str = "\n\n".join(repr(c) for c in self.contexts)
+        message = "*** ContextException EXCEPTION ***\n" + f"A failure has occurred on contexts, their are not " \
+                                                           f"compatible:\n {contexts_str} "
+        print(message)
