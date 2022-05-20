@@ -31,6 +31,17 @@ def group_conjunction(elements: set[Context]) -> Context:
 def group_disjunction(elements: set[Context]) -> Context:
     typeset = Typeset.from_typesets([c.typeset for c in elements])
     formula = or_([c.formula for c in elements])
+    mutex_list = []
+    for name in typeset:
+        mutex = typeset[name].mutex_group
+        if mutex != "":
+            if mutex in mutex_list:
+                continue
+            else:
+                if not mutex_list:
+                    mutex_list.append(mutex)
+                else:
+                    raise ContextException(contexts=elements)
 
     return Context(_init_formula=formula, _typeset=typeset)
 
