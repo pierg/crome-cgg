@@ -21,7 +21,7 @@ def group_conjunction(elements: set[Context]) -> Context:
             if mutex not in mutex_list:
                 mutex_list.append(mutex)
             else:
-                raise ContextException
+                raise ContextException(contexts=elements)
 
     formula = and_([c.formula for c in elements])
 
