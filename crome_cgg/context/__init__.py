@@ -37,10 +37,9 @@ def group_disjunction(elements: set[Context]) -> Context:
 
 @dataclass(kw_only=True)
 class ContextException(Exception):
-    contexts: set[Context]
 
-    def __post_init(self):
-        contexts_str = "\n\n".join(repr(c) for c in self.contexts)
-        message = "*** ContextException EXCEPTION ***\n" + f"A failure has occurred on contexts, their are not " \
-                                                           f"compatible:\n {contexts_str} "
-        print(message)
+    def __init__(self, contexts: set[Context]):
+        contexts_str = "\n\t".join(repr(c) for c in contexts)
+        self.message = "*** ContextException EXCEPTION ***\n" + f"A failure has occurred on contexts, their are not " \
+                                                           f"compatible:\n\t{contexts_str} "
+        super().__init__(self.message)
