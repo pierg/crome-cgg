@@ -6,15 +6,20 @@ from dataclasses import dataclass
 
 
 class Context(LTL):
-    pass
+    check_satisfiable: bool = True
+
+    def __post_init__(self):
+        if not self.typeset:
+            return
+
+        if self.check_satisfiable and self.is_satisfiable:
+            raise ContextException({self})
 
 
 def group_conjunction(elements: set[Context]) -> Context:
     typeset = Typeset.from_typesets([c.typeset for c in elements])
     formula = and_([c.formula for c in elements])
     context = Context(_init_formula=formula, _typeset=typeset)
-    if not context.is_satisfiable:
-        raise ContextException(elements)
 
     return context
 
@@ -23,8 +28,6 @@ def group_disjunction(elements: set[Context]) -> Context:
     typeset = Typeset.from_typesets([c.typeset for c in elements])
     formula = or_([c.formula for c in elements])
     context = Context(_init_formula=formula, _typeset=typeset)
-    if not context.is_satisfiable:
-        raise ContextException(elements)
 
     return context
 
