@@ -6,14 +6,7 @@ from dataclasses import dataclass
 
 
 class Context(LTL):
-    check_satisfiable: bool = True
-
-    def __post_init__(self):
-        if not self.typeset:
-            return
-
-        if self.check_satisfiable and self.is_satisfiable:
-            raise ContextException({self})
+    pass
 
 
 def group_conjunction(elements: set[Context]) -> Context:
@@ -35,8 +28,8 @@ def group_disjunction(elements: set[Context]) -> Context:
 @dataclass(kw_only=True)
 class ContextException(Exception):
 
-    def __init__(self, contexts: set[Context]):
+    def __init__(self, contexts: set[Context], formula: str):
         contexts_str = "\n\t".join(c.formula for c in contexts)
         self.message = "*** ContextException EXCEPTION ***\n" + f"A failure has occurred on contexts, their are not " \
-                                                           f"compatible:\n\t{contexts_str} "
+                       f"compatible.\nThe desired formula is : {formula}.\nThe contexts used are :\n\t{contexts_str} "
         super().__init__(self.message)
