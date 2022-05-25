@@ -14,7 +14,9 @@ from crome_cgg.goal.operations._shared import (
 
 def g_composition(goals: set[Goal], cgg: Cgg | None = None) -> Goal:
     if len(goals) == 1:
-        return next(iter(goals))
+        goal = next(iter(goals))
+        cgg.add_node(goal=goal)
+        return goal
     if len(goals) == 0:
         raise Exception("No goal specified in the composition")
 

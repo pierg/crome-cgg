@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 
 from crome_cgg.cgg.exceptions import GoalAlreadyPresent
 from crome_cgg.goal import Goal
-from crome_cgg.shared.paths import output_folder
+from crome_cgg.shared.paths import output_folder_cgg
 from crome_logic.tools.crome_io import save_to_file
 from tools.strings import tab, tabar
 
@@ -150,7 +150,7 @@ class Cgg:
             layout = self._graph.layout("kk")
             fig, ax = plt.subplots()
             plot(self._graph, layout=layout, target=ax)
-            plt.savefig(output_folder / "cgg.pdf")
+            plt.savefig(output_folder_cgg / "cgg.pdf")
 
     def export_to_json(self, project_path: Path | None) -> dict[str, Any]:
         json_content = {"nodes": [], "edges": []}

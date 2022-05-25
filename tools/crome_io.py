@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-from crome_cgg.shared.paths import output_folder
+from crome_cgg.shared.paths import output_folder_cgg
 
 
 def save_to_file(
@@ -18,13 +18,13 @@ def save_to_file(
         raise AttributeError
 
     if folder_name is not None:
-        file_folder = output_folder / folder_name
+        file_folder = output_folder_cgg / folder_name
 
     elif absolute_folder_path is not None:
         file_folder = absolute_folder_path
 
     else:
-        file_folder = output_folder
+        file_folder = output_folder_cgg
 
     if not file_folder.exists():
         os.makedirs(file_folder)
