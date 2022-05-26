@@ -76,6 +76,22 @@ class Goal:
 
         return json_content
 
+
+    def compare_with(self: Goal, other: Goal):
+        typeset = self.world.typeset + other.world.typeset
+
+        from crome_logic.specification.rules_extractors import (
+            extract_refinement_rules
+        )
+
+        rules = extract_refinement_rules(typeset)
+        print(self.contract)
+        print(other.contract)
+        print(rules)
+        print(rules)
+
+
+
     def __str__(self):
         res = []
 
