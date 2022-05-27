@@ -1,9 +1,12 @@
 from crome_cgg.goal import Goal
 from crome_cgg.goal.operations.merging import g_merging
 from crome_cgg.goal.operations.separation import g_separation
+from crome_cgg.library import Library
 from crome_cgg.world import World
 from crome_contracts.contract import Contract
-from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling
+from crome_logic.patterns.basic import GF
+from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling, Visit
+from crome_logic.patterns.robotic_triggers import InstantaneousReaction
 from crome_logic.specification.temporal import LTL
 from crome_logic.tools.string_manipulation import latexit
 from crome_logic.typelement.robotic import (
@@ -24,7 +27,7 @@ abs_world = World(
                             description="back", mutex_group="abstract_locs", adjacency_set={"lf"}
                             ),
             BooleanLocation(
-                name="lc", description="charge", refinement_of={"lf"}
+                name="le", description="entrance", refinement_of={"lf"}
             ),
             BooleanSensor(
                 name="s", description="person detected"
@@ -36,14 +39,6 @@ abs_world = World(
     ),
 )
 
-ordered_patrolling_top = LTL(_init_formula=OrderedPatrolling(["lf", "lb"]), _typeset=abs_world.typeset)
-print(latexit(ordered_patrolling_top.formula))
-
-top_spec = Goal(contract=Contract(_guarantees=ordered_patrolling_top))
-
-
-print(f"TOP_SPEC:\n{top_spec}")
-
 lib_world = World(
     project_name=project_name,
     typeset=Typeset(
@@ -52,7 +47,7 @@ lib_world = World(
                 name="l1", mutex_group="locations", adjacency_set={"l3", "l2"}, refinement_of={"lf"}
             ),
             BooleanLocation(
-                name="l2", mutex_group="locations", adjacency_set={"l1", "l4"}, refinement_of={"lc"}
+                name="l2", mutex_group="locations", adjacency_set={"l1", "l4"}, refinement_of={"le"}
             ),
             BooleanLocation(
                 name="l3", mutex_group="locations", adjacency_set={"l1", "l4", "l5"}, refinement_of={"lf"}
@@ -67,31 +62,44 @@ lib_world = World(
     ),
 )
 
+library_goals = {
+    Goal(
+        id="l1",
+        contract=Contract(LTL(Patrolling(["l1", "l5"]), lib_world.typeset)),
+        world=lib_world,
+    ),
+    Goal(
+        id="l2",
+        contract=Contract(LTL(Patrolling(["l3"]), lib_world.typeset)),
+        world=lib_world,
+    ),
+    Goal(
+        id="l3",
+        contract=Contract(LTL(Visit(["l3", "l1"]), lib_world.typeset)),
+        world=lib_world,
+    ),
+    Goal(
+        id="l4",
+        contract=Contract(LTL(Visit(["l5"]), lib_world.typeset)),
+        world=lib_world,
+    ),
+}
 
-lib_spec = Goal(
-    contract=Contract(_guarantees=LTL(_init_formula=Patrolling(["l5", "l1"]),
-                                      _typeset=lib_world.typeset)
-                      ))
 
-print(f"LIB_SPEC:\n{lib_spec}")
+goal_to_refine = Goal(
+    id="ordered_patrolling",
+    contract=Contract(
+        # _assumptions=LTL(GF("s")),
+        _guarantees=LTL(f'{OrderedPatrolling(["lf", "lb"])} & {InstantaneousReaction("s", "g")}', abs_world.typeset)),
+    world=abs_world,
+)
 
-print(lib_spec <= top_spec)
+print(goal_to_refine)
 
-assert not lib_spec <= top_spec
-print(lib_spec <= top_spec)
+library = Library(library_goals)
 
-sep = g_separation(lib_spec, top_spec)
-print(f"SEPARATION:\n{sep}")
-print(latexit(sep.contract.assumptions.formula))
-print(latexit(sep.contract.guarantees.formula))
+candidate_composition = library.get_candidate_composition(goal_to_refine=goal_to_refine)
 
-new = g_merging({top_spec, sep})
-print(f"MERGING RES:\n{new}")
-print(latexit(new.contract.assumptions.formula))
-print(latexit(new.contract.guarantees.formula))
+print(candidate_composition)
 
-print("\n\n")
-print(lib_spec)
-print("REFINES")
-print(new)
-print(lib_spec <= new)
+print(candidate_composition.contract <= goal_to_refine.contract)

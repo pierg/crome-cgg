@@ -12,58 +12,43 @@ from crome_logic.typeset import Typeset
 
 @dataclass
 class Library:
-
-    def __init__(self, goals: set[Goal] | None):
-        if goals is None:
-            self._goals = set()
-        else:
-            self._goals: set[Goal] = goals
-
-        self._typeset = Typeset()
-
-        for goal in self.goals:
-            self._typeset += goal.contract.typeset
-
-    @property
-    def goals(self) -> set[Goal]:
-        return self._goals
+    goals: set[Goal]
 
     @property
     def typeset(self) -> Typeset:
-        return self._typeset
-
-    def add_goals(self, goals: set[Goal]):
-        self._goals |= goals
-        for goal in goals:
-            self._typeset |= goal.contract.typeset
+        typeset = Typeset()
+        for goal in self.goals:
+            typeset += goal.contract.typeset
+        return typeset
 
     def get_candidate_composition(self, goal_to_refine: Goal):
 
         candidates = Counter()
-        best_similar_types = 0
+        best_similarity_score = 0
 
         for n in range(1, len(self.goals)):
             for subset in itertools.combinations(self.goals, n):
                 n_compositions = len(subset)
                 if n_compositions == 1:
-                    subset_typeset = subset[0].specification.typeset
+                    subset_typeset = subset[0].contract.typeset
                 else:
                     subset_typeset = reduce(
-                        (lambda x, y: x | y), [g.specification.typeset for g in subset]
+                        (lambda x, y: x + y), [g.contract.typeset for g in subset]
                     )
-                similar_types = self.covers(goal_to_refine, subset_typeset)[1]
-                if similar_types > best_similar_types:
+                similarity_score = subset_typeset.similarity_score(goal_to_refine.contract.typeset)
+                print(similarity_score)
+                if similarity_score > best_similarity_score:
                     candidates = Counter()
-                    best_similar_types = similar_types
-                elif similar_types == best_similar_types:
-                    candidates[g_composition(subset)] = n_compositions
+                    best_similarity_score = similarity_score
+                elif similarity_score == best_similarity_score:
+                    candidates[g_composition(set(subset))] = n_compositions
 
         print(
-            f"There are {len(candidates.keys())} candidates with the same number of similar types: {best_similar_types}"
+            f"There are {len(candidates.keys())} candidates with the same number of similar types: {best_similarity_score}"
         )
 
-        for node, count in candidates.items():
-            print(f"{node.name}: {count}")
+        for goal, count in candidates.items():
+            print(f"{goal.id}: {count}")
 
         # Filtering candidates with too many goals composed
         new_candidates = [
@@ -71,7 +56,7 @@ class Library:
         ]
 
         print("filtering...")
-        print("\n".join(e.name for e in new_candidates))
+        print("\n".join(e.id for e in new_candidates))
 
         winner = self.get_most_refined(new_candidates)
         print(f"{winner.id} is the most refined candidate")
@@ -79,15 +64,20 @@ class Library:
 
     def get_most_refined(self, goals: list[Goal]) -> Goal:
 
+        if len(goals) == 1:
+            return goals[0]
+
         scores = Counter()
 
+        for g in goals:
+            scores[g] = 0
         for a, b in itertools.permutations(goals, 2):
             if a <= b:
                 scores[a] += 1
 
         print("ratings")
-        for node, count in scores.items():
-            print(f"{node.name}: {count}")
+        for goal, count in scores.items():
+            print(f"{goal.id}: {count}")
 
         return scores.most_common(1)[0][0]
 
@@ -116,26 +106,8 @@ class Library:
 
         return None
 
-    def covers(self, goal: Goal, typeset: Typeset = None) -> (bool, int):
-        """Return true if all the types of the goal are covered by the same
-        type or refinements.
-
-        It also returns the number of similar types
+    def covers(self, goal: Goal) -> float:
+        """Returns the percentage of "coverage" of the library to 'goal'. I.e. the ratio of how many types are similar
         """
-        if typeset is None:
-            typeset = self._typeset
-        n_t_covered = 0
-        for t_goal in goal.contract.typeset.values():
-            t_covered = False
-            for t_lib in typeset.values():
-                if t_lib <= t_goal:
-                    t_covered = True
-                    continue
-            if not t_covered:
-                return False, n_t_covered
-            else:
-                n_t_covered += 1
+        return self.typeset.similarity_score(goal.contract.typeset)
 
-        if n_t_covered == goal.contract.typeset.size:
-            return True, n_t_covered
-        return False, n_t_covered
