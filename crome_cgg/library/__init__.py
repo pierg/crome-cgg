@@ -75,6 +75,9 @@ class Library:
             if a <= b:
                 scores[a] += 1
 
+        for goal, count in scores.items():
+            scores[goal] = count/len(goals) * 100
+
         print("ratings")
         for goal, count in scores.items():
             print(f"{goal.id}: {count}")

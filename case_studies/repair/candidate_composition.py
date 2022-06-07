@@ -1,14 +1,9 @@
 from crome_cgg.goal import Goal
-from crome_cgg.goal.operations.merging import g_merging
-from crome_cgg.goal.operations.separation import g_separation
 from crome_cgg.library import Library
 from crome_cgg.world import World
 from crome_contracts.contract import Contract
-from crome_logic.patterns.basic import GF
-from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling, Visit
-from crome_logic.patterns.robotic_triggers import InstantaneousReaction
+from crome_logic.patterns.robotic_movement import Patrolling, OrderedPatrolling, Visit
 from crome_logic.specification.temporal import LTL
-from crome_logic.tools.string_manipulation import latexit
 from crome_logic.typelement.robotic import (
     BooleanLocation, BooleanSensor, BooleanAction,
 )
@@ -90,7 +85,7 @@ goal_to_refine = Goal(
     id="ordered_patrolling",
     contract=Contract(
         # _assumptions=LTL(GF("s")),
-        _guarantees=LTL(f'{OrderedPatrolling(["lf", "lb"])} & {InstantaneousReaction("s", "g")}', abs_world.typeset)),
+        _guarantees=LTL(f'{OrderedPatrolling(["lf", "lb"])}', abs_world.typeset)),
     world=abs_world,
 )
 

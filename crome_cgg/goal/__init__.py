@@ -4,11 +4,12 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from crome_cgg.context import Context
+from crome_cgg.goal.operations.refinement import g_refinement
 from crome_cgg.tools.names import generate_goal_id
 from crome_cgg.world import World
 from crome_contracts.contract import Contract
 from crome_logic.specification.temporal import LTL
-from crome_synthesis.controller import Controller
+from crome_synthesis.controller import Controller, ControllerInfo
 from tools.strings import tab
 
 
@@ -48,14 +49,15 @@ class Goal:
             self.viewpoint: str = self.contract.typeset.extract_viewpoint()
 
     def __le__(self: Goal, other: Goal):
-        return self.contract <= other.contract
+        return g_refinement
 
     @property
     def controller(self) -> Controller | None:
         return self._controller
 
     def realize(self):
-        self._controller = Controller(self.contract.assumptions, self.contract.guarantees)
+        cinfo = ControllerInfo.from_ltl(self.contract.assumptions, self.contract.guarantees)
+        self._controller = Controller(name=f"ctrl_{self.id}", info=cinfo)
 
     def export_to_json(self) -> dict[str, Any]:
         json_content = {"contract": {}}
