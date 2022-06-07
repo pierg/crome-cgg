@@ -1,6 +1,7 @@
 from crome_contracts.contract.exceptions import ContractException
 
 from crome_cgg.cgg import Cgg, Link
+
 from crome_cgg.goal import Goal
 from crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
 

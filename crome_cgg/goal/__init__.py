@@ -4,7 +4,6 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from crome_cgg.context import Context
-from crome_cgg.goal.operations.refinement import g_refinement
 from crome_cgg.tools.names import generate_goal_id
 from crome_cgg.world import World
 from crome_contracts.contract import Contract
@@ -49,7 +48,8 @@ class Goal:
             self.viewpoint: str = self.contract.typeset.extract_viewpoint()
 
     def __le__(self: Goal, other: Goal):
-        return g_refinement
+        from crome_cgg.goal.operations.refinement import g_refinement
+        return g_refinement(self, other)
 
     @property
     def controller(self) -> Controller | None:
