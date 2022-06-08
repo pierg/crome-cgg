@@ -152,7 +152,7 @@ class Cgg:
             plot(self._graph, layout=layout, target=ax)
             plt.savefig(output_folder_cgg / "cgg.pdf")
 
-    def export_to_json(self, project_path: Path | None) -> dict[str, Any]:
+    def export_to_json(self, project_path: Path | None = None) -> dict[str, Any]:
         json_content = {"nodes": [], "edges": []}
         for node in self.nodes:
             json_content["nodes"].append({"id": node["goal"].id})
