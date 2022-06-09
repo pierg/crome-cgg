@@ -8,7 +8,7 @@ from crome_cgg.tools.names import generate_goal_id
 from crome_cgg.world import World
 from crome_contracts.contract import Contract
 from crome_logic.specification.temporal import LTL
-from crome_synthesis.controller import Controller, ControllerInfo
+from crome_synthesis.controller import Controller, ControllerSpec
 from tools.strings import tab
 
 
@@ -42,7 +42,7 @@ class Goal:
         if len(self.world) == 0:
             self.world = World(typeset=self.contract.typeset)
         else:
-            self.world = World(typeset=self.contract.typeset + self.world.typeset)
+            self.world.typeset += self.contract.typeset
 
         if self.viewpoint == "":
             self.viewpoint: str = self.contract.typeset.extract_viewpoint()
@@ -56,8 +56,8 @@ class Goal:
         return self._controller
 
     def realize(self):
-        cinfo = ControllerInfo.from_ltl(self.contract.assumptions, self.contract.guarantees)
-        self._controller = Controller(name=f"ctrl_{self.id}", info=cinfo)
+        cspec = ControllerSpec.from_ltl(self.contract.assumptions, self.contract.guarantees, self.world)
+        self._controller = Controller(name=f"ctrl_{self.id}", spec=cspec, _typeset=self.contract.typeset)
 
     def export_to_json(self) -> dict[str, Any]:
         json_content = {"contract": {}}
