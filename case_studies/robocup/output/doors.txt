@@ -1,0 +1,40 @@
+**ASSUMPTIONS**
+
+G F s1
+G F s2
+G F s3
+G F s4
+G F s5
+
+
+**GUARANTEES**
+
+r1
+
+F r4
+
+G(r1 -> X(r1 | r5))
+G(r2 -> X(r2 | r5))
+G(r3 -> X(r3 | r5))
+G(r4 -> X(r4 | r5))
+G(r5 -> X(r1 | r2 | r3 | r4 | r5))
+
+G((r1 & X r5) -> s1)
+G((r2 & X r5) -> s2)
+G((r3 & X r5) -> s3)
+G((r4 & X r5) -> s4)
+
+
+G(((r1 & ! r2 & ! r3 & ! r4 & ! r5) | (r2 & ! r1 & ! r3 & ! r4 & ! r5) | (r3 & ! r1 & ! r2 & ! r4 & ! r5) | (r4 & ! r1 & ! r2 & ! r3 & ! r5) | (r5 & ! r1 & ! r2 & ! r3 & ! r4)))
+
+
+**INPUTS**
+
+s1, s2, s3, s4, s5
+
+**OUTPUTS**
+
+r1, r2, r3, r4, r5
+
+**END**
+

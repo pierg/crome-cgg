@@ -12,7 +12,7 @@ def save_to_file(
     absolute_folder_path: Path | None = None,
 ) -> Path:
     if Path(file_name).suffix == "":
-        file_name = Path(file_name) / ".txt"
+        file_name = f"{Path(file_name)}.txt"
 
     if folder_name is not None and absolute_folder_path is not None:
         raise AttributeError

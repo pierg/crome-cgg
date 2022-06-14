@@ -7,7 +7,7 @@ from crome_synthesis.controller import Controller
 from crome_cgg.cgg import Cgg
 from crome_cgg.goal import Goal
 from crome_cgg.shared.paths import persistence_path
-from crome_cgg.world import World
+from crome_synthesis.world import World
 
 
 def _make_path(folder_name: str = ""):

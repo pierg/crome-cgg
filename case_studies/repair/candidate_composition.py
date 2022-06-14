@@ -1,6 +1,6 @@
 from crome_cgg.goal import Goal
 from crome_cgg.library import Library
-from crome_cgg.world import World
+from crome_synthesis.world import World
 from crome_contracts.contract import Contract
 from crome_logic.patterns.robotic_movement import Patrolling, OrderedPatrolling, Visit
 from crome_logic.specification.temporal import LTL

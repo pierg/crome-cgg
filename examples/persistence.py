@@ -19,7 +19,7 @@ from crome_cgg.tools.persistence import (
     load_goals,
     load_world,
 )
-from crome_cgg.world import World
+from crome_synthesis.world import World
 
 project_name = "gridworld_persistence"
 

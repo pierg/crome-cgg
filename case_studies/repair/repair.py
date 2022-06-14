@@ -1,7 +1,7 @@
 from crome_cgg.goal import Goal
 from crome_cgg.goal.operations.merging import g_merging
 from crome_cgg.goal.operations.separation import g_separation
-from crome_cgg.world import World
+from crome_synthesis.world import World
 from crome_contracts.contract import Contract
 from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling
 from crome_logic.specification.temporal import LTL

@@ -1,52 +1,52 @@
   t  inputs    outputs
----  --------  ----------
-  0            k1  id
-  1            k1  hl  pu
-  2            k1  pu
-  3            k1  hl  pu
-  4            k1  id
-  5            k1  id  hl
-  6            k1  id
-  7            k1  id  hl
-  8            k1  id
-  9            k1  id  hl
- 10            k1  id
- 11            k1  id  hl
- 12            k1  id
- 13            k1  id  hl
- 14            k1  pu
- 15            k1  id  hl
- 16            k1  pu
- 17            k1  hl  pu
- 18            k1  id
- 19            k1  id  hl
- 20            k1  id
- 21            k1  id  hl
- 22            k1  id
- 23            k1  id  hl
- 24            k1  id
- 25            k1  id  hl
- 26            k1  id
- 27            k1  id  hl
- 28            k1  id
- 29            k1  id  hl
- 30            k1  pu
- 31            k1  id  hl
- 32            k1  id
- 33            k1  hl  pu
- 34            k1  pu
- 35            k1  hl  pu
- 36            k1  id
- 37            k1  id  hl
- 38            k1  pu
- 39            k1  id  hl
- 40            k1  pu
- 41            k1  hl  pu
- 42            k1  id
- 43            k1  hl  pu
- 44            k1  pu
- 45            k1  id  hl
- 46            k1  id
- 47            k1  hl  pu
- 48            k1  id
- 49            k1  hl  pu
+---  --------  ---------
+  0            b2
+  1  -         -
+  2  -         -
+  3  -         -
+  4  -         -
+  5  -         -
+  6  -         -
+  7  -         -
+  8  -         -
+  9  -         -
+ 10  -         -
+ 11  -         -
+ 12  -         -
+ 13  -         -
+ 14  -         -
+ 15  -         -
+ 16  -         -
+ 17  -         -
+ 18  -         -
+ 19  -         -
+ 20  -         -
+ 21  -         -
+ 22  -         -
+ 23  -         -
+ 24  -         -
+ 25  -         -
+ 26  -         -
+ 27  -         -
+ 28  -         -
+ 29  -         -
+ 30  -         -
+ 31  -         -
+ 32  -         -
+ 33  -         -
+ 34  -         -
+ 35  -         -
+ 36  -         -
+ 37  -         -
+ 38  -         -
+ 39  -         -
+ 40  -         -
+ 41  -         -
+ 42  -         -
+ 43  -         -
+ 44  -         -
+ 45  -         -
+ 46  -         -
+ 47  -         -
+ 48  -         -
+ 49  -         -

@@ -1,0 +1,44 @@
+**ASSUMPTIONS**
+
+! nemo
+  
+G((! r1 & ! r3 & ! r5 & ! r8) -> ((X nemo) <-> nemo))
+
+
+**GUARANTEES**
+
+! camera_on & ! r12 & ! r11 & ! r9 & ! r8 & ! r6 & ! r2 & r1 & ! r3 & ! r4 & ! r5 & ! r7 & ! r10
+! r12 & ! r3 & r2 & ! r1 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! camera_on
+! camera_on & ! r11 & ! r10 & ! r9 & ! r8 & ! r6 & ! r2 & ! r1 & r3 & ! r4 & ! r5 & ! r7 & ! r12
+  
+G(r1 -> X (r1 | r9))
+G(r2 -> X (r2 | r12))
+G(r3 -> X (r3 | r11))
+G(r4 -> X (r4 | r11))
+G(r5 -> X (r5 | r10))
+G(r6 -> X (r6 | r10))
+G(r7 -> X (r7 | r10))
+G(r8 -> X (r8 | r9))
+G(r9 -> X (r9 | r1 | r8 | r10 | r12))
+G(r10 -> X (r10 | r9 | r7 | r6 | r5 | r11))
+G(r11 -> X (r11 | r10 | r4 | r3 | r12))
+G(r12 -> X (r12 | r11 | r2 | r9))
+  
+G(((r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r2 & ! r1 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r3 & ! r1 & ! r2 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r4 & ! r1 & ! r2 & ! r3 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r5 & ! r1 & ! r2 & ! r3 & ! r4 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r6 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r7 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r8 & ! r9 & ! r10 & ! r11 & ! r12) | (r8 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r9 & ! r10 & ! r11 & ! r12) | (r9 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r10 & ! r11 & ! r12) | (r10 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r11 & ! r12) | (r11 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r12) | (r12 & ! r1 & ! r2 & ! r3 & ! r4 & ! r5 & ! r6 & ! r7 & ! r8 & ! r9 & ! r10 & ! r11)))
+  
+G(X nemo -> ((X r1 <-> r1) & (X r2 <-> r2) & (X r3 <-> r3) & (X r4 <-> r4) & (X r5 <-> r5) & (X r6 <-> r6) & (X r7 <-> r7) & (X r8 <-> r8) & (X r9 <-> r9) & (X r10 <-> r10) & (X r11 <-> r11) & (X r12 <-> r12)) & X camera_on)
+  
+G (!  (X nemo) -> !  (X camera_on) )
+  
+G (F (r1 | nemo)) & G (F (r3 | nemo)) & G (F (r5 | nemo)) & G (F (r8 | nemo))
+
+
+**INPUTS**
+
+nemo
+
+**OUTPUTS**
+
+r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, camera_on
+
+**END**

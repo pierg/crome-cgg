@@ -13,7 +13,7 @@ from crome_logic.typeset import Typeset
 from crome_cgg.cgg import Cgg
 from crome_cgg.cgg.exceptions import CggException
 from crome_cgg.goal import Goal
-from crome_cgg.world import World
+from crome_synthesis.world import World
 
 project_name = "gridworld"
 
