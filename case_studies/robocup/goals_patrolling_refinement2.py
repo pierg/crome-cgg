@@ -9,7 +9,6 @@ from crome_logic.patterns.robotic_triggers import *
 from crome_logic.specification.temporal import LTL
 from crome_synthesis.controller import Controller
 
-c = Contract(_guarantees=LTL(OrderedPatrolling(["lb", "lv"]), _typeset=w_top.typeset))
 
 goals_top = {
     Goal(

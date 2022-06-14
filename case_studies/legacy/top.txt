@@ -1,0 +1,32 @@
+**ASSUMPTIONS**
+
+
+
+**GUARANTEES**
+
+lb & GF(lb & Flv) & (! lv U lb) & G(lv -> X(! lv U lb)) & G(lb -> X(! lb U lv)) & G(oj -> hl) & G((lg & oj) -> dp) & GF! oj
+
+
+# MUTEX RULES
+G((lb & ! (lh) & ! (le) & ! (lv) & ! (lk) & ! (lr) & ! (lg)) | (lh & ! (lv) & ! (le) & ! (lb) & ! (lk) & ! (lr) & ! (lg)) | (lk & ! (lh) & ! (le) & ! (lv) & ! (lb) & ! (lr) & ! (lg)) | (lr & ! (lh) & ! (le) & ! (lv) & ! (lb) & ! (lk) & ! (lg)) | (le & ! (lh) & ! (lv) & ! (lb) & ! (lk) & ! (lr) & ! (lg)) | (lv & ! (lh) & ! (le) & ! (lb) & ! (lk) & ! (lr) & ! (lg)) | (lg & ! (lh) & ! (le) & ! (lv) & ! (lb) & ! (lk) & ! (lr)))
+
+# ADJACENCY RULES
+G((! (lv) | (X((lb | lh | lk | lr | lv)))))
+G((! (lb) | (X((lb | lv)))))
+G((! (lg) | (X((lk | lg)))))
+G((! (lh) | (X((lv | lh | le)))))
+G((! (le) | (X((le | lh)))))
+G((! (lk) | (X((lk | lg)))))
+G((! (lr) | (X((lv | lr)))))
+
+
+**INPUTS**
+
+
+
+**OUTPUTS**
+
+dp, oj, lg, lr, lv, hl, lh, lk, lb, le
+
+**END**
+

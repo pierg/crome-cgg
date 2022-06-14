@@ -1,0 +1,52 @@
+# SCENARIO 3 STORING GROCERIES
+# The robot stores groceries into a pantry
+# Description: Go around the kitchen and when see grocieries store it
+
+**ASSUMPTIONS**
+
+# RULE A1: if the robot has the grocery, then disable the sensor for new groceries
+G(hold -> X(!groceries_recognized))
+
+
+**GUARANTEES**
+
+# GOAL 1: patrol kitchen
+G(F(k1)) & G(F(k2))
+
+# GOAL 2: Store object in the pantry
+G(k2 <-> X store)
+
+# RULE keep robots with free hands
+G(F(!hold))
+
+# RULE keep holding unless the robot stores the object
+G((hold & X !store) -> X(hold))
+
+# RULE if it stores the object then it does not hold anymore
+G((store) -> X(!hold))
+
+# RULE if it wants to stores then it is holding an object
+G(X store -> (hold))
+
+
+# if the robot is available to hold and
+# its in the location where it recognises an object
+# then it should not move from that location
+G((groceries_recognized & !hold & k1) -> X (k1))
+
+
+G((k2 & !(k1)) | (k1 & !(k2)))
+
+G(((k2) -> (X((k2 | k1)))))
+G(((k1) -> (X((k2 | k1)))))
+
+
+**INPUTS**
+
+groceries_recognized
+
+**OUTPUTS**
+
+hold, store, k2, k1
+
+**END**
