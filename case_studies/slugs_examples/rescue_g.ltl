@@ -1,0 +1,32 @@
+
+		([](((!s.interact & next(s.interact)) -> ((s.r3 <-> next(s.r3)) & (s.r2 <-> next(s.r2)) & (s.r4 <-> next(s.r4)) & (s.r1 <-> next(s.r1)))))) & 
+		([](((!s.defuse & next(s.defuse)) -> ((s.r3 <-> next(s.r3)) & (s.r2 <-> next(s.r2)) & (s.r4 <-> next(s.r4)) & (s.r1 <-> next(s.r1)))))) & 
+		([](((!s.not_defuse & next(s.not_defuse)) -> ((s.r3 <-> next(s.r3)) & (s.r2 <-> next(s.r2)) & (s.r4 <-> next(s.r4)) & (s.r1 <-> next(s.r1)))))) & 
+		s.r1 & 
+		!s.mem_visit_r2 & 
+		([]((next(s.mem_visit_r2) <-> (s.mem_visit_r2 | next(s.r2))))) & 
+		([]<>((s.react_hostage & s.react_bomb) | s.mem_visit_r2)) & 
+		!s.mem_visit_r3 & 
+		([]((next(s.mem_visit_r3) <-> (s.mem_visit_r3 | next(s.r3))))) & 
+		([]<>((s.react_hostage & s.react_bomb) | s.mem_visit_r3)) & 
+		([]((next(e.hostage & e.bomb) <-> next(s.react_hostage & s.react_bomb)))) & 
+		([]((((s.react_hostage & s.react_bomb) | next(s.react_hostage & s.react_bomb)) -> ((s.r3 <-> next(s.r3)) & (s.r2 <-> next(s.r2)) & (s.r4 <-> next(s.r4)) & (s.r1 <-> next(s.r1)))))) & 
+		([]((next(s.react_hostage & s.react_bomb) -> next(s.not_defuse))))
+&
+	 [](!(s.r3 & s.r2) & !(s.r3 & s.r4) & !(s.r3 & s.r1) & !(s.r2 & s.r4) & !(s.r2 & s.r1) & !(s.r4 & s.r1))
+&
+
+	((s.r3 & !s.r2 & !s.r4 & !s.r1) | (!s.r3 & s.r2 & !s.r4 & !s.r1) | (!s.r3 & !s.r2 & s.r4 & !s.r1) | (!s.r3 & !s.r2 & !s.r4 & s.r1))
+&
+			 []( (s.r3) -> ( (next(s.r3))
+									| (next(s.r2)) 
+									| (next(s.r4))  ) )  & 
+			 []( (s.r2) -> ( (next(s.r2))
+									| (next(s.r3)) 
+									| (next(s.r1))  ) )  & 
+			 []( (s.r4) -> ( (next(s.r4))
+									| (next(s.r3)) 
+									| (next(s.r1))  ) )  & 
+			 []( (s.r1) -> ( (next(s.r1))
+									| (next(s.r2)) 
+									| (next(s.r4))  ) ) 

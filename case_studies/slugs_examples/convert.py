@@ -28,7 +28,7 @@ def convert(file_name: str) -> LTL:
 
 
 if __name__ == '__main__':
-    file_name = "findwaldo"
+    file_name = "rescue"
     g = convert(f"{file_name}_g.ltl")
     a = convert(f"{file_name}_a.ltl")
     print(a)

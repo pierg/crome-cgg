@@ -14,7 +14,6 @@ phi2 = LTL("a1 & X b1", _typeset=w_ref.typeset)
 
 assert phi2 <= phi1
 
-
 phi1 = LTL("a & X b", _typeset=w_top.typeset)
 phi2 = LTL("a1 & X b2", _typeset=w_ref.typeset)
 
@@ -25,3 +24,10 @@ phi1 = LTL("a & X b", _typeset=w_top.typeset)
 phi2 = LTL("a1 & F b1", _typeset=w_ref.typeset)
 
 assert not phi2 <= phi1
+
+
+phi1 = LTL("a & X b", _typeset=w_top.typeset)
+phi2 = LTL("a1 & F b1", _typeset=w_ref.typeset)
+
+assert not phi2 <= phi1
+
