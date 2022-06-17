@@ -61,8 +61,10 @@ class Goal:
 
     def export_to_json(self) -> dict[str, Any]:
         json_content = {"contract": {}}
-        names_context = self.context.formula.replace(' ', '').split('&')
-        json_content["context"] = names_context
+        world_values = []
+        for typeset in self.context.typeset:
+            world_values.append(typeset)
+        json_content["context"] = {"formula": self.context.formula, "world_values": world_values}
 
         # We put the contracts with their LTL value only.
         contract = self.contract
