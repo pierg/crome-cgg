@@ -5,5 +5,7 @@ channels:
   - conda-forge
 
 dependencies:
+  - pdm
+  - pre-commit
   - dill
   - python-igraph
