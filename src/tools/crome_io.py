@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-from crome_cgg.shared.paths import output_folder_cgg
+from src.crome_cgg.shared.paths import output_folder_cgg
 
 
 def save_to_file(

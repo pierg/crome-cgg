@@ -1,13 +1,13 @@
-from case_studies.robocup.world.world_ref import w_ref
-from case_studies.robocup.world.world_top import w_top
-from crome_cgg.goal import Goal
-from crome_cgg.goal.operations.composition import g_composition
-from crome_contracts.contract import Contract
-from crome_logic.patterns.basic import *
-from crome_logic.patterns.robotic_movement import *
-from crome_logic.patterns.robotic_triggers import *
-from crome_logic.specification.temporal import LTL
-from crome_synthesis.controller import Controller
+from src.case_studies.robocup.world.world_ref import w_ref
+from src.case_studies.robocup.world.world_top import w_top
+from src.crome_cgg.goal import Goal
+from src.crome_cgg.goal.operations.composition import g_composition
+from src.crome_contracts.contract import Contract
+from src.crome_logic.patterns.basic import *
+from src.crome_logic.patterns.robotic_movement import *
+from src.crome_logic.patterns.robotic_triggers import *
+from src.crome_logic.specification.temporal import LTL
+from src.crome_synthesis.controller import Controller
 
 
 goals_top = {

@@ -3,10 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
-from crome_contracts.contract.exceptions import ContractException
-from crome_synthesis.controller.exceptions import ControllerException
+from src.crome_contracts.contract.exceptions import ContractException
+from src.crome_synthesis.controller.exceptions import ControllerException
 
-from crome_cgg.goal import Goal
+from src.crome_cgg.goal import Goal
 
 
 class GoalFailOperations(Enum):

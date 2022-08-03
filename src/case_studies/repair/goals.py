@@ -1,11 +1,11 @@
-from case_studies.repair.world import world
-from crome_cgg.cgg import Cgg
-from crome_cgg.goal import Goal
-from crome_contracts.contract import Contract
-from crome_logic.patterns.basic import GF
-from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling
-from crome_logic.patterns.robotic_triggers import BoundReaction, PromptReaction
-from crome_logic.specification.temporal import LTL
+from src.case_studies.repair.world import world
+from src.crome_cgg.cgg import Cgg
+from src.crome_cgg.goal import Goal
+from src.crome_contracts.contract import Contract
+from src.crome_logic.patterns.basic import GF
+from src.crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling
+from src.crome_logic.patterns.robotic_triggers import BoundReaction, PromptReaction
+from src.crome_logic.specification.temporal import LTL
 
 w = world
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
-from crome_logic.specification import and_, or_
-from crome_logic.specification.temporal import LTL
-from crome_logic.typeset import Typeset
+from src.crome_logic.specification import and_, or_
+from src.crome_logic.specification.temporal import LTL
+from src.crome_logic.typeset import Typeset
 from dataclasses import dataclass
 
 

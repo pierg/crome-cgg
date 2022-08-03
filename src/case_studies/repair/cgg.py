@@ -1,13 +1,13 @@
-from case_studies.repair.goals import goals
-from case_studies.repair.world import world
-from crome_cgg.cgg import Cgg, Link
-from crome_cgg.goal import Goal
-from crome_cgg.goal.operations.composition import g_composition
-from crome_cgg.goal.operations.quotient import g_quotient
-from crome_cgg.library import Library
-from crome_contracts.contract import Contract
-from crome_logic.patterns.robotic_movement import Patrolling
-from crome_logic.specification.temporal import LTL
+from src.case_studies.repair.goals import goals
+from src.case_studies.repair.world import world
+from src.crome_cgg.cgg import Cgg, Link
+from src.crome_cgg.goal import Goal
+from src.crome_cgg.goal.operations.composition import g_composition
+from src.crome_cgg.goal.operations.quotient import g_quotient
+from src.crome_cgg.library import Library
+from src.crome_contracts.contract import Contract
+from src.crome_logic.patterns.robotic_movement import Patrolling
+from src.crome_logic.specification.temporal import LTL
 
 w = world
 

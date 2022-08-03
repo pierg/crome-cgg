@@ -1,9 +1,9 @@
-from case_studies.robocup.world.world_ref import w_ref
-from case_studies.robocup.world.world_top import w_top
-from crome_cgg.goal import Goal
-from crome_contracts.contract import Contract
-from crome_logic.patterns.robotic_movement import *
-from crome_logic.specification.temporal import LTL
+from src.case_studies.robocup.world.world_ref import w_ref
+from src.case_studies.robocup.world.world_top import w_top
+from src.crome_cgg.goal import Goal
+from src.crome_contracts.contract import Contract
+from src.crome_logic.patterns.robotic_movement import *
+from src.crome_logic.specification.temporal import LTL
 
 
 g_top = Goal(

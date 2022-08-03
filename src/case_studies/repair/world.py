@@ -1,11 +1,11 @@
-from crome_synthesis.world import World
-from crome_logic.typelement.robotic import (
+from src.crome_synthesis.world import World
+from src.crome_logic.typelement.robotic import (
     BooleanAction,
     BooleanContext,
     BooleanLocation,
     BooleanSensor,
 )
-from crome_logic.typeset import Typeset
+from src.crome_logic.typeset import Typeset
 
 project_name = "mission_repair"
 

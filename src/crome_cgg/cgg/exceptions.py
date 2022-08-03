@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from crome_cgg.goal import Goal
+from src.crome_cgg.goal import Goal
 
 
 @dataclass(kw_only=True)

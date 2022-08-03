@@ -4,10 +4,10 @@ import os
 import dill as dill
 from crome_synthesis.controller import Controller
 
-from crome_cgg.cgg import Cgg
-from crome_cgg.goal import Goal
-from crome_cgg.shared.paths import persistence_path
-from crome_synthesis.world import World
+from src.crome_cgg.cgg import Cgg
+from src.crome_cgg.goal import Goal
+from src.crome_cgg.shared.paths import persistence_path
+from src.crome_synthesis.world import World
 
 
 def _make_path(folder_name: str = ""):

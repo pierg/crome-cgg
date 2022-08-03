@@ -1,8 +1,8 @@
-from case_studies.minimal.world.world_ref import w_ref
-from case_studies.minimal.world.world_top import w_top
-from crome_logic.patterns.robotic_movement import OrderedVisit, \
+from src.case_studies.minimal.world.world_ref import w_ref
+from src.case_studies.minimal.world.world_top import w_top
+from src.crome_logic.patterns.robotic_movement import OrderedVisit, \
     StrictOrderedVisit
-from crome_logic.specification.temporal import LTL
+from src.crome_logic.specification.temporal import LTL
 
 """"
 |a1 | b1|

@@ -1,4 +1,4 @@
-from crome_logic.specification.temporal import LTL
+from src.crome_logic.specification.temporal import LTL
 
 output_file = "example_g.txt"
 

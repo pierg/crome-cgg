@@ -1,8 +1,8 @@
-from case_studies.robocup.world.world_top import w_top
-from crome_synthesis.world import World
+from src.case_studies.robocup.world.world_top import w_top
+from src.crome_synthesis.world import World
 
-from crome_logic.typelement.robotic import BooleanLocation, BooleanAction, BooleanSensor
-from crome_logic.typeset import Typeset
+from src.crome_logic.typelement.robotic import BooleanLocation, BooleanAction, BooleanSensor
+from src.crome_logic.typeset import Typeset
 
 
 w_ref = World(

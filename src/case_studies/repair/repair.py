@@ -1,12 +1,12 @@
-from crome_cgg.goal import Goal
-from crome_cgg.goal.operations.merging import g_merging
-from crome_cgg.goal.operations.separation import g_separation
-from crome_synthesis.world import World
-from crome_contracts.contract import Contract
-from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling
-from crome_logic.specification.temporal import LTL
-from crome_logic.tools.string_manipulation import latexit
-from crome_logic.typelement.robotic import (
+from src.crome_cgg.goal import Goal
+from src.crome_cgg.goal.operations.merging import g_merging
+from src.crome_cgg.goal.operations.separation import g_separation
+from src.crome_synthesis.world import World
+from src.crome_contracts.contract import Contract
+from src.crome_logic.patterns.robotic_movement import StrictOrderedPatrolling, Patrolling, OrderedPatrolling
+from src.crome_logic.specification.temporal import LTL
+from src.crome_logic.tools.string_manipulation import latexit
+from src.crome_logic.typelement.robotic import (
     BooleanLocation, BooleanSensor, BooleanAction,
 )
 from crome_logic.typeset import Typeset

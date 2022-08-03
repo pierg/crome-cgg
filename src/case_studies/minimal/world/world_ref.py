@@ -1,7 +1,7 @@
-from case_studies.minimal.world.world_top import w_top
-from crome_logic.typelement.robotic import BooleanLocation
-from crome_logic.typeset import Typeset
-from crome_synthesis.world import World
+from src.case_studies.minimal.world.world_top import w_top
+from src.crome_logic.typelement.robotic import BooleanLocation
+from src.crome_logic.typeset import Typeset
+from src.crome_synthesis.world import World
 
 w_ref = World(
     project_name="ref",

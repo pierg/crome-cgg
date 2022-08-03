@@ -1,9 +1,9 @@
-from crome_contracts.contract.exceptions import ContractException
+from src.crome_contracts.contract.exceptions import ContractException
 
-from crome_cgg.cgg import Cgg, Link
+from src.crome_cgg.cgg import Cgg, Link
 
-from crome_cgg.goal import Goal
-from crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
+from src.crome_cgg.goal import Goal
+from src.crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
 
 
 def g_refinement(goal_b: Goal, goal_t: Goal, cgg: Cgg | None = None) -> Cgg:

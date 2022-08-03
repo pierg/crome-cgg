@@ -1,5 +1,5 @@
 from __future__ import annotations
 
-from crome_cgg.cgg import Cgg
+from src.crome_cgg.cgg import Cgg
 
 cgg: Cgg = Cgg()

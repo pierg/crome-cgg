@@ -1,12 +1,12 @@
 import itertools
 from copy import deepcopy
 
-from crome_cgg.cgg import Cgg
-from crome_cgg.context import Context
-from crome_cgg.goal import Goal
-from crome_cgg.goal.operations.composition import g_composition
-from crome_cgg.goal.operations.conjunction import g_conjunction
-from crome_cgg.goal.operations.merging import g_merging
+from src.crome_cgg.cgg import Cgg
+from src.crome_cgg.context import Context
+from src.crome_cgg.goal import Goal
+from src.crome_cgg.goal.operations.composition import g_composition
+from src.crome_cgg.goal.operations.conjunction import g_conjunction
+from src.crome_cgg.goal.operations.merging import g_merging
 
 
 def context_based_goal_clustering(init_goals: set[Goal], cgg: Cgg):

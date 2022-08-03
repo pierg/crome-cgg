@@ -1,7 +1,7 @@
-from case_studies.robocup.world.world_ref import w_ref
-from case_studies.robocup.world.world_top import w_top
-from crome_logic.patterns.robotic_movement import *
-from crome_logic.specification.temporal import LTL
+from src.case_studies.robocup.world.world_ref import w_ref
+from src.case_studies.robocup.world.world_top import w_top
+from src.crome_logic.patterns.robotic_movement import *
+from src.crome_logic.specification.temporal import LTL
 
 
 phi1 = LTL(OrderedPatrolling(["lb", "lv"]), _typeset=w_top.typeset)
