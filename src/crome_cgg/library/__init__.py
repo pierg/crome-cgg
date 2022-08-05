@@ -5,9 +5,9 @@ from collections import Counter
 from dataclasses import dataclass
 from functools import reduce
 
-from src.crome_cgg.goal import Goal
-from src.crome_cgg.goal.operations.composition import g_composition
-from src.crome_logic.typeset import Typeset
+from crome_cgg.src.crome_cgg.goal import Goal
+from crome_cgg.src.crome_cgg.goal.operations.composition import g_composition
+from crome_logic.src.crome_logic.typeset import Typeset
 
 
 @dataclass

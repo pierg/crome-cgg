@@ -1,15 +1,15 @@
 import os
 from pathlib import Path
 
-from src.case_studies.robocup.world.world_top import w_top
-from src.crome_cgg.goal import Goal
-from src.crome_cgg.goal.operations.composition import g_composition
-from src.crome_contracts.contract import Contract
-from src.crome_logic.patterns.basic import *
-from src.crome_logic.patterns.robotic_movement import *
-from src.crome_logic.patterns.robotic_triggers import *
-from src.crome_logic.specification.temporal import LTL
-from src.tools.crome_io import save_to_file
+from crome_cgg.src.case_studies.robocup.world.world_top import w_top
+from crome_cgg.src.crome_cgg.goal import Goal
+from crome_cgg.src.crome_cgg.goal.operations.composition import g_composition
+from crome_contracts.src.crome_contracts.contract import Contract
+from crome_logic.src.crome_logic.patterns.basic import *
+from crome_logic.src.crome_logic.patterns.robotic_movement import *
+from crome_logic.src.crome_logic.patterns.robotic_triggers import *
+from crome_logic.src.crome_logic.specification.temporal import LTL
+from crome_cgg.src.tools.crome_io import save_to_file
 
 goals_top = {
     Goal(

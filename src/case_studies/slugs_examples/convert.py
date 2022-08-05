@@ -1,5 +1,5 @@
-from src.crome_logic.specification.temporal import LTL
-from src.crome_synthesis.controller import ControllerSpec, Controller
+from crome_logic.src.crome_logic.specification.temporal import LTL
+from crome_synthesis.src.crome_synthesis.controller import ControllerSpec, Controller
 
 
 def convert(file_name: str) -> LTL:

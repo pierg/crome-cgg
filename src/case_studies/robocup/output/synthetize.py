@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from src.crome_synthesis.controller import Controller
+from crome_synthesis.src.crome_synthesis.controller import Controller
 
 folder_name = "ref/groce"
 output_folder: Path = Path(os.path.dirname(__file__)) / folder_name

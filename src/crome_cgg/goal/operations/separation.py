@@ -1,11 +1,11 @@
-from src.crome_contracts.contract.exceptions import ContractException
-from src.crome_contracts.operations.separation import separation
+from crome_contracts.src.crome_contracts.contract.exceptions import ContractException
+from crome_contracts.src.crome_contracts.operations.separation import separation
 
-from src.crome_cgg.cgg import Cgg, Link
-from src.crome_cgg.context import group_conjunction
-from src.crome_cgg.goal import Goal
-from src.crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
-from src.crome_cgg.goal.operations._shared import (
+from crome_cgg.src.crome_cgg.cgg import Cgg, Link
+from crome_cgg.src.crome_cgg.context import group_conjunction
+from crome_cgg.src.crome_cgg.goal import Goal
+from crome_cgg.src.crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
+from crome_cgg.src.crome_cgg.goal.operations._shared import (
     GoalOperation,
     generate_goal_operations_name_description,
     generate_shared_world,

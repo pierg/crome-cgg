@@ -1,9 +1,9 @@
-from crome_synthesis.rule import Rule
-from crome_synthesis.world import World
-from crome_logic.specification.temporal import LTL
+from crome_synthesis.src.crome_synthesis.rule import Rule
+from crome_synthesis.src.crome_synthesis.world import World
+from crome_logic.src.crome_logic.specification.temporal import LTL
 
-from crome_logic.typelement.robotic import BooleanLocation, BooleanAction, BooleanSensor
-from crome_logic.typeset import Typeset
+from crome_logic.src.crome_logic.typelement.robotic import BooleanLocation, BooleanAction, BooleanSensor
+from crome_logic.src.crome_logic.typeset import Typeset
 
 w_top = World(
     project_name="top",

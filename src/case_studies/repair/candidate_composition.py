@@ -1,13 +1,13 @@
-from src.crome_cgg.goal import Goal
-from src.crome_cgg.library import Library
-from src.crome_synthesis.world import World
-from src.crome_contracts.contract import Contract
-from src.crome_logic.patterns.robotic_movement import Patrolling, OrderedPatrolling, Visit
-from src.crome_logic.specification.temporal import LTL
-from src.crome_logic.typelement.robotic import (
+from crome_cgg.src.crome_cgg.goal import Goal
+from crome_cgg.src.crome_cgg.library import Library
+from crome_synthesis.src.crome_synthesis.world import World
+from crome_contracts.src.crome_contracts.contract import Contract
+from crome_logic.src.crome_logic.patterns.robotic_movement import Patrolling, OrderedPatrolling, Visit
+from crome_logic.src.crome_logic.specification.temporal import LTL
+from crome_logic.src.crome_logic.typelement.robotic import (
     BooleanLocation, BooleanSensor, BooleanAction,
 )
-from src.crome_logic.typeset import Typeset
+from crome_logic.src.crome_logic.typeset import Typeset
 
 project_name = "mission_repair"
 

@@ -1,14 +1,14 @@
 import os
 from pathlib import Path
 
-from src.case_studies.robocup.world.world_ref import w_ref
-from src.crome_cgg.goal import Goal
-from src.crome_cgg.goal.operations.composition import g_composition
-from src.crome_contracts.contract import Contract
-from src.crome_logic.patterns.robotic_triggers import InstantaneousReaction
-from src.crome_logic.specification.temporal import LTL
-from src.crome_logic.tools.crome_io import save_to_file
-from src.crome_synthesis.rule import Rule
+from crome_cgg.src.case_studies.robocup.world.world_ref import w_ref
+from crome_cgg.src.crome_cgg.goal import Goal
+from crome_cgg.src.crome_cgg.goal.operations.composition import g_composition
+from crome_contracts.src.crome_contracts.contract import Contract
+from crome_logic.src.crome_logic.patterns.robotic_triggers import InstantaneousReaction
+from crome_logic.src.crome_logic.specification.temporal import LTL
+from crome_logic.src.crome_logic.tools.crome_io import save_to_file
+from crome_synthesis.src.crome_synthesis.rule import Rule
 
 folder_spec_name: str = "clean"
 output_folder: Path = Path(os.path.dirname(__file__)).parent / "output" / "ref" / folder_spec_name

@@ -1,8 +1,8 @@
-from src.crome_cgg.goal import Goal
-from src.crome_cgg.goal.operations.merging import g_merging
-from src.crome_cgg.goal.operations.separation import g_separation
-from src.crome_contracts.contract import Contract
-from src.crome_logic.specification.temporal import LTL
+from crome_cgg.src.crome_cgg.goal import Goal
+from crome_cgg.src.crome_cgg.goal.operations.merging import g_merging
+from crome_cgg.src.crome_cgg.goal.operations.separation import g_separation
+from crome_contracts.src.crome_contracts.contract import Contract
+from crome_logic.src.crome_logic.specification.temporal import LTL
 
 
 

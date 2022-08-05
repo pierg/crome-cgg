@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 from src.crome_cgg.cgg.exceptions import GoalAlreadyPresent
 from src.crome_cgg.goal import Goal
 from src.crome_cgg.shared.paths import output_folder_cgg
-from src.crome_logic.tools.crome_io import save_to_file
+from crome_logic.src.crome_logic.tools.crome_io import save_to_file
 from src.tools.strings import tab, tabar
 
 

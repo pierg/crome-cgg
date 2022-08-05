@@ -3,13 +3,13 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from src.crome_cgg.context import Context
-from src.crome_cgg.tools.names import generate_goal_id
-from src.crome_contracts.contract import Contract
-from src.crome_logic.specification.temporal import LTL
-from src.crome_synthesis.controller import Controller, ControllerSpec
-from src.crome_synthesis.world import World
-from src.tools.strings import tab
+from crome_cgg.src.crome_cgg.context import Context
+from crome_cgg.src.crome_cgg.tools.names import generate_goal_id
+from crome_contracts.src.crome_contracts.contract import Contract
+from crome_logic.src.crome_logic.specification.temporal import LTL
+from crome_synthesis.src.crome_synthesis.controller import Controller, ControllerSpec
+from crome_synthesis.src.crome_synthesis.world import World
+from crome_cgg.src.tools.strings import tab
 
 
 @dataclass
