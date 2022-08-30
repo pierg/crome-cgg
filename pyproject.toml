@@ -1,52 +1,24 @@
-[build-system]
-requires = ["pdm-pep517"]
-build-backend = "pdm.pep517.api"
-
 [project]
 name = "crome-cgg"
-description = "Contract-Based Goal Graph package"
-authors = [{name = "Piergiuseppe Mallozzi", email = "piergiuseppe.mallozzi@gmail.com"}]
-license-expression = "MIT"
-readme = "README.md"
-requires-python = ">=3.7"
-keywords = []
-dynamic = ["version"]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Documentation",
-    "Topic :: Software Development",
-    "Topic :: Software Development :: Documentation",
-    "Topic :: Utilities",
-    "Typing :: Typed",
+version = ""
+description = "Contract algebra implementation in LTL"
+authors = [
+    {name = "Piergiuseppe Mallozzi", email = "piergiuseppe.mallozzi@gmail.com"},
 ]
-dependencies = []
-
-[project.urls]
-Homepage = "https://pierg.github.io/crome-cgg"
-Documentation = "https://pierg.github.io/crome-cgg"
-Changelog = "https://pierg.github.io/crome-cgg/changelog"
-Repository = "https://github.com/pierg/crome-cgg"
-Issues = "https://github.com/pierg/crome-cgg/issues"
-Discussions = "https://github.com/pierg/crome-cgg/discussions"
-Gitter = "https://gitter.im/crome-cgg/community"
-Funding = "https://github.com/sponsors/pierg"
+dependencies = [
+    "editables>=0.3",
+    "crome-contracts @ file:///${PROJECT_ROOT}/crome_contracts",
+    "crome-logic @ file:///${PROJECT_ROOT}/crome_logic",
+]
+requires-python = ">=3.9,<3.11"
+license = {text = "MIT"}
 
 [project.scripts]
-crome-cgg = "crome_cgg.cli:main"
+example = "crome_cgg.cli:main"
 
-[tool.pdm]
-version = {use_scm = true}
-package-dir = "src"
-editable-backend = "editables"
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
 
 [tool.pdm.dev-dependencies]
 duty = ["duty>=0.7"]
@@ -97,17 +69,9 @@ typing = [
     "types-toml>=0.10",
 ]
 security = ["safety>=1.10"]
+dev = [
+    "pre-commit>=2.20.0",
+]
 
-[tool.black]
-line-length = 120
-exclude = "tests/fixtures"
-
-[tool.isort]
-line_length = 120
-not_skip = "__init__.py"
-multi_line_output = 3
-force_single_line = false
-balanced_wrapping = true
-default_section = "THIRDPARTY"
-known_first_party = "crome_cgg"
-include_trailing_comma = true
+[tool]
+[tool.pdm]

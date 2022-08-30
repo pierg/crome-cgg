@@ -14,10 +14,9 @@ pdm.lock
 .pdm.toml
 __pypackages__/
 .venv/
+.vscode/
 
-#### joe made this: http://goel.io/joe
-#### macos ####
-# General
+
 *.DS_Store
 .AppleDouble
 .LSOverride
@@ -25,9 +24,12 @@ __pypackages__/
 # Icon must end with two \r
 Icon
 
+./output/*
 
 # Thumbnails
 ._*
+
+.idea/
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
@@ -83,7 +85,6 @@ $RECYCLE.BIN/
 *.lnk
 #### python ####
 # Byte-compiled / optimized / DLL files
-
 *$py.class
 
 # C extensions
@@ -93,6 +94,7 @@ $RECYCLE.BIN/
 .Python
 
 develop-eggs/
+
 downloads/
 eggs/
 .eggs/
@@ -102,7 +104,6 @@ parts/
 sdist/
 var/
 wheels/
-
 .installed.cfg
 *.egg
 
@@ -179,7 +180,6 @@ ENV/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/*
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries

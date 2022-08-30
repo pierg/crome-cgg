@@ -1,23 +1,21 @@
 site_name: "crome-cgg"
-site_description: "Contract-Based Goal Graph package"
+site_description: "LTL and Boolean formulas manipulation"
 site_url: "https://pierg.github.io/crome-cgg"
 repo_url: "https://github.com/pierg/crome-cgg"
 repo_name: "pierg/crome-cgg"
 site_dir: "site"
-watch: [README.md, CONTRIBUTING.md, CHANGELOG.md, src/crome_cgg]
+watch: [README.md, crome_cgg]
 
 nav:
 - Home:
   - Overview: index.md
-  - Changelog: changelog.md
-  - Credits: credits.md
   - License: license.md
 # defer to gen-files + literate-nav
-- Code Reference: reference/
+# - Code Reference: reference/
 - Development:
   - Contributing: contributing.md
-  - Code of Conduct: code_of_conduct.md
-  - Coverage report: coverage.md
+  # - Code of Conduct: code_of_conduct.md
+  # - Coverage report: coverage.md
 
 theme:
   name: material

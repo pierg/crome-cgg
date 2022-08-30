@@ -20,15 +20,14 @@ WORKDIR /home
 
 ENV GIT_SSL_NO_VERIFY=1
 COPY . /home/crome-cgg
-RUN git clone https://github.com/pierg/crome-contracts.git --branch main --single-branch
 RUN git clone https://github.com/pierg/crome-logic.git --branch main --single-branch
-RUN git clone https://github.com/pierg/crome-synthesis.git --branch main --single-branch
 
 WORKDIR /home/crome-cgg
 
 # Copy /venv from the previous stage:
 COPY --from=build /venv ./venv
 
-ENV PYTHONPATH "/home/crome-cgg:/home/crome-contracts:/home/crome-logic:/home/crome-synthesis"
+ENV PYTHONPATH "/home/crome-cgg:/home/crome-logic"
+
 
 ENTRYPOINT ["./entrypoint.sh"]

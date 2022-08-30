@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-PYTHON_VERSIONS="${PYTHON_VERSIONS-3.7 3.8 3.9 3.10 3.11}"
+
+PYTHON_VERSIONS="${PYTHON_VERSIONS-3.10 3.11}"
 
 install_with_pipx() {
     if ! command -v "$1" &>/dev/null; then
@@ -10,6 +11,19 @@ install_with_pipx() {
         fi
         pipx install "$1"
     fi
+}
+
+
+setup() {
+    pdm install
+    echo "pdm dependecies installed"
+    echo "creating conda environment..."
+    pdm venv create --with conda
+    echo "activating conda environment..."
+    source "$(conda info --base)/etc/profile.d/conda.sh"
+    conda activate ./.venv
+    echo "installing conda dependencies..."
+    conda env update --file conda-dependencies.yml --prune
 }
 
 install_with_pipx pdm
@@ -28,11 +42,11 @@ if [ -n "${PYTHON_VERSIONS}" ]; then
     for python_version in ${PYTHON_VERSIONS}; do
         if pdm use -f "python${python_version}" &>/dev/null; then
             echo "> Using Python ${python_version} interpreter"
-            pdm install
+            setup
         else
             echo "> pdm use -f python${python_version}: Python interpreter not available?" >&2
         fi
     done
 else
-    pdm install
+    setup
 fi

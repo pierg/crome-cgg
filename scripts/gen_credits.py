@@ -8,9 +8,9 @@ from jinja2 import StrictUndefined
 from jinja2.sandbox import SandboxedEnvironment
 
 try:
-    from importlib.metadata import metadata, PackageNotFoundError
+    from importlib.metadata import PackageNotFoundError, metadata
 except ImportError:
-    from importlib_metadata import metadata, PackageNotFoundError
+    from importlib_metadata import PackageNotFoundError, metadata
 
 project_dir = Path(".")
 pyproject = toml.load(project_dir / "pyproject.toml")
@@ -20,6 +20,7 @@ lock_data = toml.load(project_dir / "pdm.lock")
 lock_pkgs = {pkg["name"].lower(): pkg for pkg in lock_data["package"]}
 project_name = project["name"]
 regex = re.compile(r"(?P<dist>[\w.-]+)(?P<spec>.*)$")
+
 
 def get_license(pkg_name):
     try:
@@ -34,12 +35,17 @@ def get_license(pkg_name):
                 license = value.rsplit("::", 1)[1].strip()
     return license or "?"
 
+
 def get_deps(base_deps):
     deps = {}
     for dep in base_deps:
         parsed = regex.match(dep).groupdict()
         dep_name = parsed["dist"].lower()
-        deps[dep_name] = {"license": get_license(dep_name), **parsed, **lock_pkgs[dep_name]}
+        deps[dep_name] = {
+            "license": get_license(dep_name),
+            **parsed,
+            **lock_pkgs[dep_name],
+        }
 
     again = True
     while again:
@@ -50,10 +56,15 @@ def get_deps(base_deps):
                     parsed = regex.match(pkg_dependency).groupdict()
                     dep_name = parsed["dist"].lower()
                     if dep_name not in deps:
-                        deps[dep_name] = {"license": get_license(dep_name), **parsed, **lock_pkgs[dep_name]}
+                        deps[dep_name] = {
+                            "license": get_license(dep_name),
+                            **parsed,
+                            **lock_pkgs[dep_name],
+                        }
                         again = True
-        
+
     return deps
+
 
 dev_dependencies = get_deps(chain(*pdm.get("dev-dependencies", {}).values()))
 prod_dependencies = get_deps(
@@ -65,7 +76,9 @@ prod_dependencies = get_deps(
 
 template_data = {
     "project_name": project_name,
-    "prod_dependencies": sorted(prod_dependencies.values(), key=lambda dep: dep["name"]),
+    "prod_dependencies": sorted(
+        prod_dependencies.values(), key=lambda dep: dep["name"]
+    ),
     "dev_dependencies": sorted(dev_dependencies.values(), key=lambda dep: dep["name"]),
     "more_credits": "",
 }

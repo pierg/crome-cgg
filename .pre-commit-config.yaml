@@ -1,6 +1,5 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
-exclude: ^(|docs/|example-plugin/|tests/fixtures|scripts/|duties.py|yarn.lock|tests/|src/frontend/build/)
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
