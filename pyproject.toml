@@ -10,6 +10,7 @@ dependencies = [
     "crome-contracts @ file:///${PROJECT_ROOT}/crome_contracts",
     "crome-logic @ file:///${PROJECT_ROOT}/crome_logic",
     "crome-synthesis @ file:///${PROJECT_ROOT}/crome_synthesis",
+    "igraph>=0.9.11",
 ]
 requires-python = ">=3.9,<3.11"
 license = {text = "MIT"}
@@ -17,6 +18,7 @@ license = {text = "MIT"}
 [project.scripts]
 example = "crome_cgg.cli:main"
 
+[project.optional-dependencies]
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
@@ -72,6 +74,7 @@ typing = [
 security = ["safety>=1.10"]
 dev = [
     "pre-commit>=2.20.0",
+    "pylint>=2.15.0",
 ]
 
 [tool]
