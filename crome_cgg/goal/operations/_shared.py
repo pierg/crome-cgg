@@ -1,7 +1,8 @@
 from enum import Enum, auto
 
-from crome_cgg.goal import Goal
 from crome_synthesis.src.crome_synthesis.world import World
+
+from crome_cgg.goal import Goal
 
 
 class GoalOperation(Enum):

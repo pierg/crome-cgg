@@ -3,7 +3,6 @@ from crome_cgg.case_studies.robocup.world.world_top import w_top
 from crome_logic.patterns.robotic_movement import *
 from crome_logic.specification.temporal import LTL
 
-
 phi1 = LTL(OrderedPatrolling(["lb", "lv"]), _typeset=w_top.typeset)
 phi2 = LTL(OrderedPatrolling(["b2", "l2"]), _typeset=w_ref.typeset)
 

@@ -1,33 +1,29 @@
 # crome-cgg
 
-Contract algebra implementation in LTL
+**Contract-Based Goal Graph**
+
+The tool helps the designer model and deploy robotic missions using contracts. The designer can model the environment, and the goals that the robot must achieve using LTL or Specification Patterns. The tool analyze the goals, build the CGG (a graph of contracts) and realize the controllers via reactive synthesis and simulate the robotic mission.
+
 
 [Contract for System Design](https://hal.inria.fr/hal-0o0757488/file/RR-8147.pdf)
 
 Documentation available [here](https://pierg.github.io/crome-cgg).
 
-## Dependencies
-
-Pull all the submodules and update them to the latest commit
-
-```bash
-git submodule init 
-```
-
-```bash
-git submodule update --remote --merge
-```
-
 ## Installation
 
 We use [pdm](https://github.com/pdm-project/pdm) to most of the dependencies, and
-[conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+[conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html). Make sure they are installed on your system.
 
 To setup the environment, simply run:
 
 ```bash
 make setup
 ```
+
+The setup script will:
+* Pull all the submodule dependencies
+* Install all the dependecies via pdm
+* Create a new conda environment and isntall the conda dependencies
 
 
 > NOTE:

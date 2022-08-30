@@ -1,14 +1,4 @@
-from crome_cgg.contract import Contract
-from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling
-from crome_logic.specification.temporal import LTL
-from crome_logic.typelement.robotic import (
-    BooleanAction,
-    BooleanContext,
-    BooleanLocation,
-    BooleanSensor,
-)
-from crome_logic.typeset import Typeset
-
+from crome_synthesis.src.crome_synthesis.world import World
 from src.crome_cgg.cgg import Cgg
 from src.crome_cgg.goal import Goal
 from src.crome_cgg.tools.persistence import (
@@ -19,7 +9,17 @@ from src.crome_cgg.tools.persistence import (
     load_goals,
     load_world,
 )
-from crome_synthesis.src.crome_synthesis.world import World
+
+from crome_contracts.contract import Contract
+from crome_logic.patterns.robotic_movement import StrictOrderedPatrolling
+from crome_logic.specification.temporal import LTL
+from crome_logic.typelement.robotic import (
+    BooleanAction,
+    BooleanContext,
+    BooleanLocation,
+    BooleanSensor,
+)
+from crome_logic.typeset import Typeset
 
 project_name = "gridworld_persistence"
 

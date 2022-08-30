@@ -1,13 +1,11 @@
-from crome_cgg.contract.exceptions import ContractException
-
 from crome_cgg.cgg import Cgg, Link
-
+from crome_contracts.contract.exceptions import ContractException
 from crome_cgg.goal import Goal
 from crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
 
 
 def g_refinement(goal_b: Goal, goal_t: Goal, cgg: Cgg | None = None) -> Cgg:
-    if not(isinstance(goal_b, Goal) and isinstance(goal_t, Goal)):
+    if not (isinstance(goal_b, Goal) and isinstance(goal_t, Goal)):
         raise Exception("Two goals must be provided")
 
     try:

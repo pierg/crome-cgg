@@ -1,8 +1,6 @@
-from crome_cgg.contract.exceptions import ContractException
-from crome_cgg.operations.composition import composition
-
 from crome_cgg.cgg import Cgg, Link
 from crome_cgg.context import group_conjunction
+from crome_contracts.contract.exceptions import ContractException
 from crome_cgg.goal import Goal
 from crome_cgg.goal.exceptions import GoalAlgebraOperationFail, GoalFailOperations
 from crome_cgg.goal.operations._shared import (
@@ -10,6 +8,7 @@ from crome_cgg.goal.operations._shared import (
     generate_goal_operations_name_description,
     generate_shared_world,
 )
+from crome_cgg.operations.composition import composition
 
 
 def g_composition(goals: set[Goal], cgg: Cgg | None = None) -> Goal:

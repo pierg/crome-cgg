@@ -35,7 +35,9 @@ class Library:
                     subset_typeset = reduce(
                         (lambda x, y: x + y), [g.contract.typeset for g in subset]
                     )
-                similarity_score = subset_typeset.similarity_score(goal_to_refine.contract.typeset)
+                similarity_score = subset_typeset.similarity_score(
+                    goal_to_refine.contract.typeset
+                )
                 print(similarity_score)
                 if similarity_score > best_similarity_score:
                     candidates = Counter()
@@ -76,7 +78,7 @@ class Library:
                 scores[a] += 1
 
         for goal, count in scores.items():
-            scores[goal] = count/len(goals) * 100
+            scores[goal] = count / len(goals) * 100
 
         print("ratings")
         for goal, count in scores.items():
@@ -110,7 +112,5 @@ class Library:
         return None
 
     def covers(self, goal: Goal) -> float:
-        """Returns the percentage of "coverage" of the library to 'goal'. I.e. the ratio of how many types are similar
-        """
+        """Returns the percentage of "coverage" of the library to 'goal'. I.e. the ratio of how many types are similar"""
         return self.typeset.similarity_score(goal.contract.typeset)
-

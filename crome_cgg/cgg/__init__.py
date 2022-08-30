@@ -7,11 +7,10 @@ from typing import Any
 from igraph import Graph, plot
 from matplotlib import pyplot as plt
 
-from crome_cgg.cgg.exceptions import GoalAlreadyPresent
 from crome_cgg.goal import Goal
 from crome_cgg.shared.paths import output_folder_cgg
-from crome_logic.tools.crome_io import save_to_file
 from crome_cgg.tools.strings import tab, tabar
+from crome_logic.tools.crome_io import save_to_file
 
 
 class Link(Enum):
@@ -162,10 +161,20 @@ class Cgg:
             target_vertex_id = edge.target
             source_node_id = self.nodes[source_vertex_id]["goal"].id
             target_node_id = self.nodes[target_vertex_id]["goal"].id
-            json_content["edges"].append({"from": source_node_id, "to": target_node_id, "link": edge["link"].name})
+            json_content["edges"].append(
+                {
+                    "from": source_node_id,
+                    "to": target_node_id,
+                    "link": edge["link"].name,
+                }
+            )
 
         if project_path is not None:
             json_formatted = json.dumps(json_content, indent=4, sort_keys=True)
-            save_to_file(file_content=json_formatted, file_name="cgg.json", absolute_folder_path=project_path)
+            save_to_file(
+                file_content=json_formatted,
+                file_name="cgg.json",
+                absolute_folder_path=project_path,
+            )
 
         return json_content

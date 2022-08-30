@@ -1,11 +1,11 @@
 from crome_cgg.case_studies.repair.goals import goals
 from crome_cgg.case_studies.repair.world import world
 from crome_cgg.cgg import Cgg, Link
+from crome_contracts.contract import Contract
 from crome_cgg.goal import Goal
 from crome_cgg.goal.operations.composition import g_composition
 from crome_cgg.goal.operations.quotient import g_quotient
 from crome_cgg.library import Library
-from crome_cgg.contract import Contract
 from crome_logic.patterns.robotic_movement import Patrolling
 from crome_logic.specification.temporal import LTL
 
@@ -70,9 +70,7 @@ print(
 leaves_dict = cgg.leaves_dict
 
 
-print(
-    f"Library goal '{l2.id}' covers CGG leaf '{leaves_dict['night_patrolling'].id}'"
-)
+print(f"Library goal '{l2.id}' covers CGG leaf '{leaves_dict['night_patrolling'].id}'")
 assert not l2 <= leaves_dict["night_patrolling"]
 
 quotient = g_quotient(l2, leaves_dict["night_patrolling"])

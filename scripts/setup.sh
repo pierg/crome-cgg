@@ -15,6 +15,9 @@ install_with_pipx() {
 
 
 setup() {
+    echo "pulling the submodules"
+    git submodule init 
+    git submodule update --remote --merge
     pdm install
     echo "pdm dependecies installed"
     echo "creating conda environment..."

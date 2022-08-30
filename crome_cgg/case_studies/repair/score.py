@@ -1,11 +1,10 @@
-from crome_cgg.goal import Goal
 from crome_synthesis.src.crome_synthesis.world import World
-from crome_cgg.contract import Contract
-from crome_logic.patterns.robotic_movement import Patrolling, OrderedPatrolling
+
+from crome_contracts.contract import Contract
+from crome_cgg.goal import Goal
+from crome_logic.patterns.robotic_movement import OrderedPatrolling, Patrolling
 from crome_logic.specification.temporal import LTL
-from crome_logic.typelement.robotic import (
-    BooleanLocation,
-)
+from crome_logic.typelement.robotic import BooleanLocation
 from crome_logic.typeset import Typeset
 
 project_name = "mission_repair"
@@ -14,15 +13,19 @@ abs_world = World(
     project_name=project_name,
     typeset=Typeset(
         {
-            BooleanLocation(name="lf",
-                            description="front", mutex_group="abstract_locs", adjacency_set={"lb"}
-                            ),
-            BooleanLocation(name="lb",
-                            description="back", mutex_group="abstract_locs", adjacency_set={"lf"}
-                            ),
             BooleanLocation(
-                name="lc", description="charge", refinement_of={"lf"}
+                name="lf",
+                description="front",
+                mutex_group="abstract_locs",
+                adjacency_set={"lb"},
             ),
+            BooleanLocation(
+                name="lb",
+                description="back",
+                mutex_group="abstract_locs",
+                adjacency_set={"lf"},
+            ),
+            BooleanLocation(name="lc", description="charge", refinement_of={"lf"}),
         }
     ),
 )
@@ -32,19 +35,34 @@ lib_world = World(
     typeset=Typeset(
         {
             BooleanLocation(
-                name="l1", mutex_group="locations", adjacency_set={"l3", "l2"}, refinement_of={"lf"}
+                name="l1",
+                mutex_group="locations",
+                adjacency_set={"l3", "l2"},
+                refinement_of={"lf"},
             ),
             BooleanLocation(
-                name="l2", mutex_group="locations", adjacency_set={"l1", "l4"}, refinement_of={"lc"}
+                name="l2",
+                mutex_group="locations",
+                adjacency_set={"l1", "l4"},
+                refinement_of={"lc"},
             ),
             BooleanLocation(
-                name="l3", mutex_group="locations", adjacency_set={"l1", "l4", "l5"}, refinement_of={"lf"}
+                name="l3",
+                mutex_group="locations",
+                adjacency_set={"l1", "l4", "l5"},
+                refinement_of={"lf"},
             ),
             BooleanLocation(
-                name="l4", mutex_group="locations", adjacency_set={"l3", "l2"}, refinement_of={"lf"}
+                name="l4",
+                mutex_group="locations",
+                adjacency_set={"l3", "l2"},
+                refinement_of={"lf"},
             ),
             BooleanLocation(
-                name="l5", mutex_group="locations", adjacency_set={"l3"}, refinement_of={"lb"}
+                name="l5",
+                mutex_group="locations",
+                adjacency_set={"l3"},
+                refinement_of={"lb"},
             ),
         }
     ),
@@ -52,19 +70,38 @@ lib_world = World(
 
 
 def incompatible_library():
-    top = Goal(contract=Contract(LTL(_init_formula=Patrolling(["lf", "lc"]), _typeset=abs_world.typeset)),
-               world=abs_world)
-    ref = Goal(contract=Contract(LTL(_init_formula=Patrolling(["l5", "l3"]), _typeset=lib_world.typeset)),
-               world=lib_world)
+    top = Goal(
+        contract=Contract(
+            LTL(_init_formula=Patrolling(["lf", "lc"]), _typeset=abs_world.typeset)
+        ),
+        world=abs_world,
+    )
+    ref = Goal(
+        contract=Contract(
+            LTL(_init_formula=Patrolling(["l5", "l3"]), _typeset=lib_world.typeset)
+        ),
+        world=lib_world,
+    )
     ref_score = top.compare_with(ref)
     print(f"REFINEMENT SCORE:\n{ref_score}")
 
 
 def refinement_completed():
-    top = Goal(contract=Contract(LTL(_init_formula=Patrolling(["lf", "lc"]), _typeset=abs_world.typeset)),
-               world=abs_world)
-    ref = Goal(contract=Contract(LTL(_init_formula=OrderedPatrolling(["l5", "l2"]), _typeset=lib_world.typeset)),
-               world=lib_world)
+    top = Goal(
+        contract=Contract(
+            LTL(_init_formula=Patrolling(["lf", "lc"]), _typeset=abs_world.typeset)
+        ),
+        world=abs_world,
+    )
+    ref = Goal(
+        contract=Contract(
+            LTL(
+                _init_formula=OrderedPatrolling(["l5", "l2"]),
+                _typeset=lib_world.typeset,
+            )
+        ),
+        world=lib_world,
+    )
     ref_score = top.compare_with(ref)
     print(f"REFINEMENT SCORE:\n{ref_score}")
 
@@ -77,8 +114,8 @@ def repair():
     pass
 
 
-
 print(ref <= top)
+
 
 def refinement_score(top: Goal, ref: Goal) -> float:
     top.compare_with(ref)
@@ -89,6 +126,5 @@ def refinement_score(top: Goal, ref: Goal) -> float:
     print("WAIT")
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     refinement_score(top, ref)

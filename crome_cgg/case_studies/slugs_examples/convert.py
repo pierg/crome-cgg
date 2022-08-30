@@ -1,5 +1,6 @@
+from crome_synthesis.src.crome_synthesis.controller import Controller, ControllerSpec
+
 from crome_logic.specification.temporal import LTL
-from crome_synthesis.src.crome_synthesis.controller import ControllerSpec, Controller
 
 
 def convert(file_name: str) -> LTL:
@@ -27,7 +28,7 @@ def convert(file_name: str) -> LTL:
             return ltl
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     file_name = "rescue"
     g = convert(f"{file_name}_g.ltl")
     a = convert(f"{file_name}_a.ltl")
@@ -38,4 +39,3 @@ if __name__ == '__main__':
     print(controller.mealy)
     print(controller.simulate())
     controller.save("png")
-

@@ -1,4 +1,4 @@
-def tab(stringable_object, how_many=1, init_character: str="") -> str:
+def tab(stringable_object, how_many=1, init_character: str = "") -> str:
     t: str = ""
     t += init_character
     t += "\t" * how_many

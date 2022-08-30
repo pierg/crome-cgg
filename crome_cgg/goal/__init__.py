@@ -3,13 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from crome_cgg.context import Context
-from crome_cgg.tools.names import generate_goal_id
-from crome_cgg.contract import Contract
-from crome_logic.specification.temporal import LTL
 from crome_synthesis.src.crome_synthesis.controller import Controller, ControllerSpec
 from crome_synthesis.src.crome_synthesis.world import World
+
+from crome_cgg.context import Context
+from crome_contracts.contract import Contract
+from crome_cgg.tools.names import generate_goal_id
 from crome_cgg.tools.strings import tab
+from crome_logic.specification.temporal import LTL
 
 
 @dataclass
@@ -49,6 +50,7 @@ class Goal:
 
     def __le__(self: Goal, other: Goal):
         from crome_cgg.goal.operations.refinement import g_refinement
+
         return g_refinement(self, other)
 
     @property
@@ -56,15 +58,22 @@ class Goal:
         return self._controller
 
     def realize(self):
-        cspec = ControllerSpec.from_ltl(self.contract.assumptions, self.contract.guarantees, self.world)
-        self._controller = Controller(name=f"ctrl_{self.id}", spec=cspec, _typeset=self.contract.typeset)
+        cspec = ControllerSpec.from_ltl(
+            self.contract.assumptions, self.contract.guarantees, self.world
+        )
+        self._controller = Controller(
+            name=f"ctrl_{self.id}", spec=cspec, _typeset=self.contract.typeset
+        )
 
     def export_to_json(self) -> dict[str, Any]:
         json_content = {"contract": {}}
         world_values = []
         for typeset in self.context.typeset:
             world_values.append(typeset)
-        json_content["context"] = {"formula": self.context.formula, "world_values": world_values}
+        json_content["context"] = {
+            "formula": self.context.formula,
+            "world_values": world_values,
+        }
 
         # We put the contracts with their LTL value only.
         contract = self.contract
@@ -80,21 +89,16 @@ class Goal:
 
         return json_content
 
-
     def compare_with(self: Goal, other: Goal):
         typeset = self.world.typeset + other.world.typeset
 
-        from crome_logic.specification.rules_extractors import (
-            extract_refinement_rules
-        )
+        from crome_logic.specification.rules_extractors import extract_refinement_rules
 
         rules = extract_refinement_rules(typeset)
         print(self.contract)
         print(other.contract)
         print(rules)
         print(rules)
-
-
 
     def __str__(self):
         res = []
@@ -107,6 +111,7 @@ class Goal:
         res.append(tab(str(self.contract), how_many=1, init_character="|"))
 
         return "\n".join(res)
+
 
 if __name__ == "__main__":
     g = Goal(contract=Contract(LTL("Ga")))

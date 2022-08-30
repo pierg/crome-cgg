@@ -3,9 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
-from crome_cgg.contract.exceptions import ContractException
-from crome_synthesis.src.crome_synthesis.controller.exceptions import ControllerException
+from crome_synthesis.src.crome_synthesis.controller.exceptions import (
+    ControllerException,
+)
 
+from crome_contracts.contract.exceptions import ContractException
 from crome_cgg.goal import Goal
 
 
