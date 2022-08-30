@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from crome_synthesis.src.crome_synthesis.rule import Rule
+from crome_synthesis.rule import Rule
 
 from crome_cgg.case_studies.robocup.world.world_ref import w_ref
 from crome_contracts.contract import Contract

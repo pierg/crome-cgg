@@ -2,8 +2,8 @@
 import os
 
 import dill as dill
-from crome_synthesis.src.crome_synthesis.controller import Controller
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.controller import Controller
+from crome_synthesis.world import World
 
 from crome_cgg.cgg import Cgg
 from crome_cgg.goal import Goal

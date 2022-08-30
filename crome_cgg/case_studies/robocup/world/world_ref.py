@@ -1,4 +1,4 @@
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.world import World
 
 from crome_cgg.case_studies.robocup.world.world_top import w_top
 from crome_logic.typelement.robotic import BooleanAction, BooleanLocation, BooleanSensor

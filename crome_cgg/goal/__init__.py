@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from crome_synthesis.src.crome_synthesis.controller import Controller, ControllerSpec
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.controller import Controller, ControllerSpec
+from crome_synthesis.world import World
 
 from crome_cgg.context import Context
 from crome_contracts.contract import Contract

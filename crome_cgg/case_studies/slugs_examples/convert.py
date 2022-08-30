@@ -1,4 +1,4 @@
-from crome_synthesis.src.crome_synthesis.controller import Controller, ControllerSpec
+from crome_synthesis.controller import Controller, ControllerSpec
 
 from crome_logic.specification.temporal import LTL
 

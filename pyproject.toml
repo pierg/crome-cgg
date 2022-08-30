@@ -9,6 +9,7 @@ dependencies = [
     "editables>=0.3",
     "crome-contracts @ file:///${PROJECT_ROOT}/crome_contracts",
     "crome-logic @ file:///${PROJECT_ROOT}/crome_logic",
+    "crome-synthesis @ file:///${PROJECT_ROOT}/crome_synthesis",
 ]
 requires-python = ">=3.9,<3.11"
 license = {text = "MIT"}

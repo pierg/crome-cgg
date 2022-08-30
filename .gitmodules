@@ -4,3 +4,6 @@
 [submodule "crome_contracts"]
 	path = crome_contracts
 	url = https://github.com/pierg/crome-contracts.git
+[submodule "crome_synthesis"]
+	path = crome_synthesis
+	url = https://github.com/pierg/crome-synthesis.git

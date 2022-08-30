@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
-from crome_synthesis.src.crome_synthesis.controller.exceptions import (
+from crome_synthesis.controller.exceptions import (
     ControllerException,
 )
 

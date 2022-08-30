@@ -1,4 +1,4 @@
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.world import World
 
 from crome_logic.typelement.robotic import (
     BooleanAction,

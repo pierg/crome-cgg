@@ -1,4 +1,4 @@
-from crome_synthesis.src.crome_synthesis.controller import Controller
+from crome_synthesis.controller import Controller
 
 from crome_cgg.case_studies.robocup.world.world_ref import w_ref
 from crome_cgg.case_studies.robocup.world.world_top import w_top

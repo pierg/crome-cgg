@@ -1,4 +1,4 @@
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.world import World
 from crome_contracts.contract import Contract
 from crome_cgg.goal import Goal
 from crome_cgg.goal.operations.merging import g_merging

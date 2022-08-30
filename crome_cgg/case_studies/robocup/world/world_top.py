@@ -1,5 +1,5 @@
-from crome_synthesis.src.crome_synthesis.rule import Rule
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.rule import Rule
+from crome_synthesis.world import World
 
 from crome_logic.specification.temporal import LTL
 from crome_logic.typelement.robotic import BooleanAction, BooleanLocation, BooleanSensor

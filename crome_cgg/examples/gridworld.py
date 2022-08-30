@@ -1,4 +1,4 @@
-from crome_synthesis.src.crome_synthesis.world import World
+from crome_synthesis.world import World
 from src.crome_cgg.cgg import Cgg
 from src.crome_cgg.cgg.exceptions import CggException
 from src.crome_cgg.goal import Goal
