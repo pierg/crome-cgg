@@ -10,7 +10,6 @@ dependencies = [
     "crome-contracts @ file:///${PROJECT_ROOT}/crome_contracts",
     "crome-logic @ file:///${PROJECT_ROOT}/crome_logic",
     "crome-synthesis @ file:///${PROJECT_ROOT}/crome_synthesis",
-    "igraph>=0.9.11",
 ]
 requires-python = ">=3.9,<3.11"
 license = {text = "MIT"}

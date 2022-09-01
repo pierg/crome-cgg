@@ -6,3 +6,4 @@ dependencies:
   - python=3.10
   - pygraphviz
   - spot
+  - python-igraph
